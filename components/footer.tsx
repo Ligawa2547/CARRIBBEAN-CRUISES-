@@ -71,6 +71,16 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/menu" className="text-ocean-200 hover:text-white transition-colors">
+                  Dining Menu
+                </Link>
+              </li>
+              <li>
+                <Link href="/videos" className="text-ocean-200 hover:text-white transition-colors">
+                  Videos
+                </Link>
+              </li>
+              <li>
                 <Link href="/contact" className="text-ocean-200 hover:text-white transition-colors">
                   Contact Us
                 </Link>

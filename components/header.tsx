@@ -62,6 +62,18 @@ export default function Header() {
           >
             Contact
           </Link>
+          <Link
+            href="/menu"
+            className="text-sm font-medium transition-colors hover:text-ocean-600 dark:hover:text-ocean-400"
+          >
+            Menu
+          </Link>
+          <Link
+            href="/videos"
+            className="text-sm font-medium transition-colors hover:text-ocean-600 dark:hover:text-ocean-400"
+          >
+            Videos
+          </Link>
 
           {user ? (
             <DropdownMenu>
@@ -155,6 +167,20 @@ export default function Header() {
                   onClick={() => setIsOpen(false)}
                 >
                   Contact
+                </Link>
+                <Link
+                  href="/menu"
+                  className="text-base font-medium transition-colors hover:text-ocean-600 dark:hover:text-ocean-400"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Menu
+                </Link>
+                <Link
+                  href="/videos"
+                  className="text-base font-medium transition-colors hover:text-ocean-600 dark:hover:text-ocean-400"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Videos
                 </Link>
 
                 {user ? (

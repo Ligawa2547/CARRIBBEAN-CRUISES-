@@ -15,7 +15,9 @@ import {
   Calendar,
   CheckCircle,
   Compass,
+  Film,
   MapPin,
+  Play,
   Ship,
   Star,
   Ticket,
@@ -138,6 +140,31 @@ const testimonials = [
     quote:
       "The opportunities for career advancement are incredible. Caribbean Cruises continues to support my professional development and has helped me progress from an entry-level position to management.",
     avatar: "/placeholder.svg?height=80&width=80",
+  },
+]
+
+// Add featured videos data
+const featuredVideos = [
+  {
+    id: "video1",
+    title: "Caribbean Cruise Experience",
+    thumbnail:
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-523876470-612x612.jpg-R3vDPL0GdzHEamZw1sP7YywMtCkfin.jpeg",
+    duration: "3:45",
+  },
+  {
+    id: "video2",
+    title: "Life Onboard Our Ships",
+    thumbnail:
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-599881398-612x612.jpg-eFmo84tEmWwiTXdIyi3XGSvbZKrDea.jpeg",
+    duration: "5:12",
+  },
+  {
+    id: "video3",
+    title: "Culinary Delights at Sea",
+    thumbnail:
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-458115989-612x612.jpg-RplCqufQCEEykO51cHF3tKjHRbSLEN.jpeg",
+    duration: "4:30",
   },
 ]
 
@@ -497,6 +524,79 @@ export function HomeClient() {
           </div>
         </section>
 
+        {/* Dining Menu Section */}
+        <section className="py-16 bg-gray-50 dark:bg-gray-900">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-4">
+                <span className="bg-gradient-to-r from-ocean-600 to-cruise-600 bg-clip-text text-transparent">
+                  Exquisite Dining Experience
+                </span>
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                Indulge in world-class cuisine prepared by our expert chefs using the freshest ingredients.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+                <div className="h-48 relative">
+                  <Image src="/placeholder.svg?height=400&width=600" alt="Fine Dining" fill className="object-cover" />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold mb-2">Gourmet Cuisine</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Experience culinary excellence with our internationally inspired menu options.
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+                <div className="h-48 relative">
+                  <Image
+                    src="/placeholder.svg?height=400&width=600"
+                    alt="Specialty Restaurants"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold mb-2">Specialty Restaurants</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Choose from multiple dining venues, each offering a unique culinary experience.
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+                <div className="h-48 relative">
+                  <Image
+                    src="/placeholder.svg?height=400&width=600"
+                    alt="Beverage Selection"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold mb-2">Premium Beverages</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Enjoy our extensive selection of fine wines, craft cocktails, and non-alcoholic options.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-center mt-10">
+              <Link
+                href="/menu"
+                className="inline-flex items-center justify-center rounded-md bg-ocean-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-ocean-700 focus:outline-none focus:ring-2 focus:ring-ocean-500 focus:ring-offset-2"
+              >
+                View Full Menu
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* Testimonials Section */}
         <section className="py-16 md:py-24">
           <div className="container px-4 md:px-6">
@@ -573,6 +673,67 @@ export function HomeClient() {
                 As official partners, we have exclusive access to job openings and special cruise packages that aren't
                 available through other agencies.
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Add this Videos Section before the CTA section */}
+        <section className="py-16 bg-gray-50 dark:bg-gray-900">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <Badge className="mb-4 bg-ocean-100 text-ocean-700 hover:bg-ocean-200 dark:bg-ocean-900/50 dark:text-ocean-300 dark:hover:bg-ocean-900/70">
+                Featured Content
+              </Badge>
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-4">
+                <span className="bg-gradient-to-r from-ocean-600 to-cruise-600 bg-clip-text text-transparent">
+                  Explore Our Video Gallery
+                </span>
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                Watch our latest videos showcasing life at sea, destinations, and behind-the-scenes footage
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {featuredVideos.map((video) => (
+                <div key={video.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden group">
+                  <div className="h-48 relative">
+                    <Image
+                      src={video.thumbnail || "/placeholder.svg"}
+                      alt={video.title}
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="w-12 h-12 rounded-full bg-white/80 flex items-center justify-center">
+                        <Play className="h-6 w-6 text-ocean-600 ml-1" />
+                      </div>
+                    </div>
+                    <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+                      {video.duration}
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-lg font-semibold mb-2">{video.title}</h3>
+                    <Link
+                      href={`/videos/${video.id}`}
+                      className="text-ocean-600 hover:text-ocean-700 text-sm font-medium flex items-center"
+                    >
+                      Watch Now
+                      <ArrowRight className="ml-1 h-3 w-3" />
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="text-center mt-10">
+              <Button asChild variant="outline" className="gap-2">
+                <Link href="/videos">
+                  <Film className="h-4 w-4" />
+                  View All Videos
+                </Link>
+              </Button>
             </div>
           </div>
         </section>
