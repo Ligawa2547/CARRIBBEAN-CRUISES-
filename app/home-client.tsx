@@ -541,7 +541,7 @@ export function HomeClient() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
                 <div className="h-48 relative">
-                  <Image src="/placeholder.svg?height=400&width=600" alt="Fine Dining" fill className="object-cover" />
+                  <Image src="/images/menu/steak-dish.png" alt="Fine Dining" fill className="object-cover" />
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2">Gourmet Cuisine</h3>
@@ -553,12 +553,7 @@ export function HomeClient() {
 
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
                 <div className="h-48 relative">
-                  <Image
-                    src="/placeholder.svg?height=400&width=600"
-                    alt="Specialty Restaurants"
-                    fill
-                    className="object-cover"
-                  />
+                  <Image src="/images/menu/noodle-soup.png" alt="Specialty Restaurants" fill className="object-cover" />
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2">Specialty Restaurants</h3>
@@ -570,12 +565,7 @@ export function HomeClient() {
 
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
                 <div className="h-48 relative">
-                  <Image
-                    src="/placeholder.svg?height=400&width=600"
-                    alt="Beverage Selection"
-                    fill
-                    className="object-cover"
-                  />
+                  <Image src="/images/menu/cocktail-trio.png" alt="Beverage Selection" fill className="object-cover" />
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2">Premium Beverages</h3>
