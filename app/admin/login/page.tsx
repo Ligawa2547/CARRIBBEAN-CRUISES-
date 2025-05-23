@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { Shield } from "lucide-react"
+import { Shield, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -52,9 +52,18 @@ export default function AdminLoginPage() {
             <Shield className="h-10 w-10 text-ocean-600 dark:text-ocean-400" />
           </div>
           <CardTitle className="text-2xl font-bold text-ocean-950 dark:text-white">Admin Login</CardTitle>
-          <CardDescription>Enter your credentials to access the admin dashboard</CardDescription>
+          <CardDescription>Access restricted to authorized administrators only</CardDescription>
         </CardHeader>
         <CardContent>
+          <div className="mb-4 p-3 rounded-md bg-blue-50 text-blue-800 dark:bg-blue-900/20 dark:text-blue-300 border border-blue-200 dark:border-blue-800/30">
+            <div className="flex items-center gap-2">
+              <Mail className="h-4 w-4" />
+              <p className="text-sm">
+                Admin access is restricted to: <strong>wilsonligawa3@gmail.com</strong>
+              </p>
+            </div>
+          </div>
+
           {error && (
             <div className="mb-4 p-3 rounded-md bg-red-50 text-red-800 dark:bg-red-900/20 dark:text-red-300 border border-red-200 dark:border-red-800/30">
               <p className="text-sm font-medium">{error}</p>
@@ -72,7 +81,7 @@ export default function AdminLoginPage() {
                 type="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="admin@example.com"
+                placeholder="wilsonligawa3@gmail.com"
                 required
               />
             </div>
@@ -94,6 +103,12 @@ export default function AdminLoginPage() {
               {isSubmitting ? "Logging in..." : "Login"}
             </Button>
           </form>
+
+          <div className="mt-4 text-center">
+            <p className="text-xs text-gray-600 dark:text-gray-400">
+              Don't have access? Contact the system administrator.
+            </p>
+          </div>
         </CardContent>
       </Card>
     </div>

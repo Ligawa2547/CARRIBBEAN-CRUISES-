@@ -4,6 +4,9 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import ClientLayout from "@/components/client-layout"
+import { VercelAnalytics } from "@/components/vercel-analytics"
+import ZohoChat from "@/components/zoho-chat"
+import { Suspense } from "react"
 
 // Optimize font loading
 const inter = Inter({
@@ -76,8 +79,12 @@ export default function RootLayout({
       </head>
       <body className="font-sans">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <ClientLayout>{children}</ClientLayout>
+          <Suspense fallback={null}>
+            <ClientLayout>{children}</ClientLayout>
+          </Suspense>
         </ThemeProvider>
+        <VercelAnalytics />
+        <ZohoChat />
       </body>
     </html>
   )
