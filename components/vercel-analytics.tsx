@@ -1,17 +1,32 @@
 "use client"
 
 import { useEffect } from "react"
-import { usePathname } from "next/navigation"
+import { usePathname, useSearchParams } from "next/navigation"
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { track } from "@vercel/analytics"
 
 export function VercelAnalytics() {
   const pathname = usePathname()
+  const searchParams = useSearchParams()
 
+  // Track page views when route changes
   useEffect(() => {
-    if (process.env.NODE_ENV === "production") {
-      // Vercel Analytics code (replace with actual Vercel Analytics integration)
-      console.log("Vercel Analytics: Page view tracked", pathname)
-    }
-  }, [pathname])
+    const url = pathname + (searchParams?.toString() ? `?${searchParams.toString()}` : "")
 
-  return null
+    // Track page view with the correct Vercel Analytics API
+    track("pageview", {
+      path: pathname,
+      url: url,
+      referrer: typeof document !== "undefined" ? document.referrer : "",
+      title: typeof document !== "undefined" ? document.title : "",
+    })
+  }, [pathname, searchParams])
+
+  return (
+    <>
+      <Analytics />
+      <SpeedInsights />
+    </>
+  )
 }
