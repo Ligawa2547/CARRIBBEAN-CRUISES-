@@ -5,8 +5,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/admin/", "/dashboard/"],
+      disallow: ["/login", "/admin/", "/dashboard/"],
     },
-    sitemap: "https://www.caribbeancruises.site/sitemap.xml",
+    sitemap: "https://caribbeancruises.site/sitemap.xml",
   }
 }
