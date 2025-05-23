@@ -19,7 +19,7 @@ interface Video {
   }
 }
 
-export default function VideoGallery() {
+export function VideoGallery() {
   const [videos, setVideos] = useState<Video[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
