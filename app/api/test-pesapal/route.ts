@@ -3,38 +3,44 @@ import { pesapalService } from "@/lib/pesapal-service"
 
 export async function GET() {
   try {
-    console.log("Testing PesaPal connectivity...")
+    console.log("Testing PesaPal connection...")
 
     // Check environment variables
-    const hasCredentials = !!(process.env.PESAPAL_CONSUMER_KEY && process.env.PESAPAL_CONSUMER_SECRET)
+    const consumerKey = process.env.PESAPAL_CONSUMER_KEY
+    const consumerSecret = process.env.PESAPAL_CONSUMER_SECRET
 
-    if (!hasCredentials) {
-      return NextResponse.json({
-        success: false,
-        error: "PesaPal credentials not found",
-        credentials: {
-          consumer_key: !!process.env.PESAPAL_CONSUMER_KEY,
-          consumer_secret: !!process.env.PESAPAL_CONSUMER_SECRET,
+    if (!consumerKey || !consumerSecret) {
+      return NextResponse.json(
+        {
+          error: "PesaPal credentials not found",
+          details: {
+            hasConsumerKey: !!consumerKey,
+            hasConsumerSecret: !!consumerSecret,
+          },
         },
-      })
+        { status: 500 },
+      )
     }
 
-    // Test token request
+    // Test token retrieval
     const token = await pesapalService.getAccessToken()
 
     return NextResponse.json({
       success: true,
       message: "PesaPal connection successful",
-      token_received: !!token,
-      credentials_configured: true,
+      tokenLength: token.length,
+      timestamp: new Date().toISOString(),
     })
   } catch (error) {
     console.error("PesaPal test error:", error)
 
-    return NextResponse.json({
-      success: false,
-      error: error instanceof Error ? error.message : "Unknown error",
-      credentials_configured: !!(process.env.PESAPAL_CONSUMER_KEY && process.env.PESAPAL_CONSUMER_SECRET),
-    })
+    return NextResponse.json(
+      {
+        error: "PesaPal connection failed",
+        details: error instanceof Error ? error.message : "Unknown error",
+        timestamp: new Date().toISOString(),
+      },
+      { status: 500 },
+    )
   }
 }

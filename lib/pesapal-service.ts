@@ -33,7 +33,7 @@ class PesaPalService {
     this.config = {
       consumerKey: process.env.PESAPAL_CONSUMER_KEY || "",
       consumerSecret: process.env.PESAPAL_CONSUMER_SECRET || "",
-      baseUrl: "https://cybqa.pesapal.com/pesapalv3/api", // Using sandbox for testing
+      baseUrl: "https://cybqa.pesapal.com/pesapalv3/api", // Sandbox URL
     }
 
     if (!this.config.consumerKey || !this.config.consumerSecret) {
@@ -45,10 +45,17 @@ class PesaPalService {
     try {
       const url = `${this.config.baseUrl}/Auth/RequestToken`
 
-      console.log("Requesting PesaPal token with:", {
+      console.log("Requesting PesaPal token...")
+      console.log("URL:", url)
+      console.log(
+        "Consumer Key:",
+        this.config.consumerKey ? `${this.config.consumerKey.substring(0, 8)}...` : "NOT SET",
+      )
+
+      const requestBody = {
         consumer_key: this.config.consumerKey,
-        url: url,
-      })
+        consumer_secret: this.config.consumerSecret,
+      }
 
       const response = await fetch(url, {
         method: "POST",
@@ -56,21 +63,27 @@ class PesaPalService {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify({
-          consumer_key: this.config.consumerKey,
-          consumer_secret: this.config.consumerSecret,
-        }),
+        body: JSON.stringify(requestBody),
       })
 
+      console.log("Token response status:", response.status)
+      console.log("Token response headers:", Object.fromEntries(response.headers.entries()))
+
+      if (!response.ok) {
+        const errorText = await response.text()
+        console.error("Token request failed:", errorText)
+        throw new Error(`HTTP ${response.status}: ${errorText}`)
+      }
+
       const responseText = await response.text()
-      console.log("PesaPal token response:", responseText)
+      console.log("Token response body:", responseText)
 
       let data
       try {
         data = JSON.parse(responseText)
       } catch (parseError) {
-        console.error("Failed to parse PesaPal response:", responseText)
-        throw new Error("Invalid response from PesaPal")
+        console.error("Failed to parse token response:", responseText)
+        throw new Error(`Invalid JSON response: ${responseText}`)
       }
 
       if (data.token) {
@@ -78,17 +91,29 @@ class PesaPalService {
         return data.token
       }
 
-      console.error("PesaPal token error:", data)
-      throw new Error(data.error || data.message || "Failed to get access token")
+      if (data.error) {
+        console.error("PesaPal token error:", data.error)
+        throw new Error(`PesaPal error: ${data.error}`)
+      }
+
+      console.error("Unexpected token response:", data)
+      throw new Error("No token received from PesaPal")
     } catch (error) {
       console.error("PesaPal Auth Error:", error)
-      throw error
+      if (error instanceof Error) {
+        throw error
+      }
+      throw new Error("Failed to authenticate with PesaPal")
     }
   }
 
   async submitOrderRequest(paymentData: PaymentRequest): Promise<PaymentResponse> {
     try {
-      console.log("Submitting order request:", paymentData)
+      console.log("=== PesaPal Order Submission ===")
+      console.log("Payment data:", {
+        ...paymentData,
+        phone_number: paymentData.phone_number.substring(0, 4) + "****", // Mask phone
+      })
 
       const token = await this.getAccessToken()
       const url = `${this.config.baseUrl}/Transactions/SubmitOrderRequest`
@@ -100,6 +125,7 @@ class PesaPalService {
       }
 
       console.log("Making payment request to:", url)
+      console.log("Request headers:", { ...headers, Authorization: "Bearer ***" })
 
       const response = await fetch(url, {
         method: "POST",
@@ -107,27 +133,46 @@ class PesaPalService {
         body: JSON.stringify(paymentData),
       })
 
+      console.log("Payment response status:", response.status)
+      console.log("Payment response headers:", Object.fromEntries(response.headers.entries()))
+
+      if (!response.ok) {
+        const errorText = await response.text()
+        console.error("Payment request failed:", errorText)
+        throw new Error(`HTTP ${response.status}: ${errorText}`)
+      }
+
       const responseText = await response.text()
-      console.log("PesaPal payment response:", responseText)
+      console.log("Payment response body:", responseText)
 
       let data
       try {
         data = JSON.parse(responseText)
       } catch (parseError) {
         console.error("Failed to parse payment response:", responseText)
-        throw new Error("Invalid payment response from PesaPal")
+        throw new Error(`Invalid JSON response: ${responseText}`)
       }
 
+      console.log("Parsed payment response:", data)
+
       if (data.order_tracking_id && data.redirect_url) {
-        console.log("Payment request successful:", data)
+        console.log("Payment request successful")
         return data
       }
 
-      console.error("Payment request failed:", data)
-      throw new Error(data.error || data.message || "Payment request failed")
+      if (data.error) {
+        console.error("PesaPal payment error:", data.error)
+        throw new Error(`PesaPal error: ${data.error}`)
+      }
+
+      console.error("Unexpected payment response:", data)
+      throw new Error("Invalid payment response from PesaPal")
     } catch (error) {
       console.error("PesaPal Payment Error:", error)
-      throw error
+      if (error instanceof Error) {
+        throw error
+      }
+      throw new Error("Failed to submit payment request")
     }
   }
 
@@ -145,6 +190,12 @@ class PesaPalService {
         method: "GET",
         headers,
       })
+
+      if (!response.ok) {
+        const errorText = await response.text()
+        console.error("Status check failed:", errorText)
+        throw new Error(`HTTP ${response.status}: ${errorText}`)
+      }
 
       const responseText = await response.text()
       console.log("Transaction status response:", responseText)
