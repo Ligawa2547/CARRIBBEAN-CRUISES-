@@ -1,20 +1,5 @@
 "use server"
-
-import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase-server"
-
-interface PaymentData {
-  amount: number
-  description: string
-  reference: string
-  first_name: string
-  last_name: string
-  email: string
-  phone_number: string
-  callback_url: string
-  type: "cruise" | "meal"
-  metadata?: any
-}
 
 export async function createCruiseBookingPayment(formData: FormData) {
   try {
@@ -83,11 +68,11 @@ export async function createCruiseBookingPayment(formData: FormData) {
       return { error: "Failed to create payment record" }
     }
 
-    // Redirect to PesaPal payment page
+    // Return success with payment URL instead of redirecting
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
     const paymentUrl = `/api/initiate-payment?reference=${reference}&amount=${amount}&email=${email}&phone=${phone}&name=${firstName} ${lastName}&type=cruise&description=${encodeURIComponent(`Cruise Booking - ${cruiseName}`)}`
 
-    redirect(paymentUrl)
+    return { success: true, paymentUrl }
   } catch (error) {
     console.error("Payment creation error:", error)
     return { error: "Failed to process payment" }
@@ -114,7 +99,7 @@ export async function createMealOrderPayment(formData: FormData) {
     const { data: order, error: orderError } = await supabase
       .from("meal_orders")
       .insert({
-        reference,
+        order_reference: reference,
         first_name: firstName,
         last_name: lastName,
         email,
@@ -155,11 +140,11 @@ export async function createMealOrderPayment(formData: FormData) {
       return { error: "Failed to create payment record" }
     }
 
-    // Redirect to PesaPal payment page
+    // Return success with payment URL instead of redirecting
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
     const paymentUrl = `/api/initiate-payment?reference=${reference}&amount=${amount}&email=${email}&phone=${phone}&name=${firstName} ${lastName}&type=meal&description=${encodeURIComponent(`Meal Order - ${items.length} items`)}`
 
-    redirect(paymentUrl)
+    return { success: true, paymentUrl }
   } catch (error) {
     console.error("Payment creation error:", error)
     return { error: "Failed to process payment" }

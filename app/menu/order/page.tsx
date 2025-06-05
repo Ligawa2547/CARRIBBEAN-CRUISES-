@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
-import { ArrowLeft, CreditCard, Plus, Minus, ShoppingCart } from "lucide-react"
+import { ArrowLeft, CreditCard, Plus, Minus, ShoppingCart, Loader2 } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -59,6 +59,7 @@ const menuItems: MenuItem[] = [
 
 export default function MealOrderPage() {
   const [cart, setCart] = useState<{ [key: string]: number }>({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [customerInfo, setCustomerInfo] = useState({
     firstName: "",
     lastName: "",
@@ -101,19 +102,33 @@ export default function MealOrderPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setIsSubmitting(true)
 
-    const formData = new FormData()
-    formData.append("firstName", customerInfo.firstName)
-    formData.append("lastName", customerInfo.lastName)
-    formData.append("email", customerInfo.email)
-    formData.append("phone", customerInfo.phone)
-    formData.append("deliveryAddress", customerInfo.deliveryAddress)
-    formData.append("amount", getCartTotal().toString())
-    formData.append("items", JSON.stringify(getCartItems()))
+    try {
+      const formData = new FormData()
+      formData.append("firstName", customerInfo.firstName)
+      formData.append("lastName", customerInfo.lastName)
+      formData.append("email", customerInfo.email)
+      formData.append("phone", customerInfo.phone)
+      formData.append("deliveryAddress", customerInfo.deliveryAddress)
+      formData.append("amount", getCartTotal().toString())
+      formData.append("items", JSON.stringify(getCartItems()))
 
-    const result = await createMealOrderPayment(formData)
-    if (result?.error) {
-      alert(result.error)
+      const result = await createMealOrderPayment(formData)
+
+      if (result?.error) {
+        alert(result.error)
+      } else if (result?.success && result?.paymentUrl) {
+        // Redirect to payment URL
+        window.location.href = result.paymentUrl
+      } else {
+        alert("Something went wrong. Please try again.")
+      }
+    } catch (error) {
+      console.error("Order submission error:", error)
+      alert("Failed to process order. Please try again.")
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -188,6 +203,7 @@ export default function MealOrderPage() {
                         <Input
                           id="firstName"
                           required
+                          disabled={isSubmitting}
                           value={customerInfo.firstName}
                           onChange={(e) => setCustomerInfo((prev) => ({ ...prev, firstName: e.target.value }))}
                         />
@@ -197,6 +213,7 @@ export default function MealOrderPage() {
                         <Input
                           id="lastName"
                           required
+                          disabled={isSubmitting}
                           value={customerInfo.lastName}
                           onChange={(e) => setCustomerInfo((prev) => ({ ...prev, lastName: e.target.value }))}
                         />
@@ -207,6 +224,7 @@ export default function MealOrderPage() {
                           id="email"
                           type="email"
                           required
+                          disabled={isSubmitting}
                           value={customerInfo.email}
                           onChange={(e) => setCustomerInfo((prev) => ({ ...prev, email: e.target.value }))}
                         />
@@ -216,6 +234,7 @@ export default function MealOrderPage() {
                         <Input
                           id="phone"
                           required
+                          disabled={isSubmitting}
                           value={customerInfo.phone}
                           onChange={(e) => setCustomerInfo((prev) => ({ ...prev, phone: e.target.value }))}
                         />
@@ -226,14 +245,24 @@ export default function MealOrderPage() {
                       <Textarea
                         id="deliveryAddress"
                         required
+                        disabled={isSubmitting}
                         value={customerInfo.deliveryAddress}
                         onChange={(e) => setCustomerInfo((prev) => ({ ...prev, deliveryAddress: e.target.value }))}
                         placeholder="Enter your full delivery address"
                       />
                     </div>
-                    <Button type="submit" className="w-full bg-ocean-600 hover:bg-ocean-700">
-                      <CreditCard className="mr-2 h-4 w-4" />
-                      Pay ${getCartTotal().toFixed(2)} & Place Order
+                    <Button type="submit" className="w-full bg-ocean-600 hover:bg-ocean-700" disabled={isSubmitting}>
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Processing...
+                        </>
+                      ) : (
+                        <>
+                          <CreditCard className="mr-2 h-4 w-4" />
+                          Pay ${getCartTotal().toFixed(2)} & Place Order
+                        </>
+                      )}
                     </Button>
                   </form>
                 </CardContent>
