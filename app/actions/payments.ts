@@ -17,6 +17,11 @@ export async function createCruiseBookingPayment(formData: FormData) {
     const passengers = formData.get("passengers") as string
     const specialRequests = formData.get("specialRequests") as string
 
+    // Validate required fields
+    if (!firstName || !lastName || !email || !phone || !amount) {
+      return { error: "Please fill in all required fields" }
+    }
+
     // Generate unique reference
     const reference = `CRUISE_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
 
@@ -52,7 +57,7 @@ export async function createCruiseBookingPayment(formData: FormData) {
       .insert({
         merchant_reference: reference,
         amount,
-        currency: "USD",
+        currency: "KES",
         description: `Cruise Booking - ${cruiseName}`,
         customer_email: email,
         customer_phone: phone,
@@ -68,9 +73,9 @@ export async function createCruiseBookingPayment(formData: FormData) {
       return { error: "Failed to create payment record" }
     }
 
-    // Return success with payment URL instead of redirecting
+    // Return success with payment URL
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
-    const paymentUrl = `/api/initiate-payment?reference=${reference}&amount=${amount}&email=${email}&phone=${phone}&name=${firstName} ${lastName}&type=cruise&description=${encodeURIComponent(`Cruise Booking - ${cruiseName}`)}`
+    const paymentUrl = `/api/initiate-payment?reference=${reference}&amount=${amount}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}&name=${encodeURIComponent(`${firstName} ${lastName}`)}&type=cruise&description=${encodeURIComponent(`Cruise Booking - ${cruiseName}`)}`
 
     return { success: true, paymentUrl }
   } catch (error) {
@@ -91,6 +96,11 @@ export async function createMealOrderPayment(formData: FormData) {
     const deliveryAddress = formData.get("deliveryAddress") as string
     const amount = Number.parseFloat(formData.get("amount") as string)
     const items = JSON.parse(formData.get("items") as string)
+
+    // Validate required fields
+    if (!firstName || !lastName || !email || !phone || !deliveryAddress || !amount) {
+      return { error: "Please fill in all required fields" }
+    }
 
     // Generate unique reference
     const reference = `MEAL_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
@@ -124,7 +134,7 @@ export async function createMealOrderPayment(formData: FormData) {
       .insert({
         merchant_reference: reference,
         amount,
-        currency: "USD",
+        currency: "KES",
         description: `Meal Order - ${items.length} items`,
         customer_email: email,
         customer_phone: phone,
@@ -140,9 +150,9 @@ export async function createMealOrderPayment(formData: FormData) {
       return { error: "Failed to create payment record" }
     }
 
-    // Return success with payment URL instead of redirecting
+    // Return success with payment URL
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
-    const paymentUrl = `/api/initiate-payment?reference=${reference}&amount=${amount}&email=${email}&phone=${phone}&name=${firstName} ${lastName}&type=meal&description=${encodeURIComponent(`Meal Order - ${items.length} items`)}`
+    const paymentUrl = `/api/initiate-payment?reference=${reference}&amount=${amount}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}&name=${encodeURIComponent(`${firstName} ${lastName}`)}&type=meal&description=${encodeURIComponent(`Meal Order - ${items.length} items`)}`
 
     return { success: true, paymentUrl }
   } catch (error) {
