@@ -1,5 +1,3 @@
-import crypto from "crypto"
-
 interface PesaPalConfig {
   consumerKey: string
   consumerSecret: string
@@ -42,29 +40,11 @@ class PesaPalService {
     }
   }
 
-  private generateSignature(method: string, url: string, params: Record<string, any> = {}): string {
-    const timestamp = Math.floor(Date.now() / 1000)
-    const nonce = crypto.randomBytes(16).toString("hex")
-
-    const baseString = `${method}&${encodeURIComponent(url)}&${encodeURIComponent(
-      Object.keys(params)
-        .sort()
-        .map((key) => `${key}=${params[key]}`)
-        .join("&"),
-    )}`
-
-    const signingKey = `${encodeURIComponent(this.config.consumerSecret)}&`
-    const signature = crypto.createHmac("sha1", signingKey).update(baseString).digest("base64")
-
-    return `OAuth oauth_consumer_key="${this.config.consumerKey}",oauth_signature_method="HMAC-SHA1",oauth_timestamp="${timestamp}",oauth_nonce="${nonce}",oauth_version="1.0",oauth_signature="${encodeURIComponent(signature)}"`
-  }
-
   async getAccessToken(): Promise<string> {
     try {
       const url = `${this.config.baseUrl}/Auth/RequestToken`
       const headers = {
         "Content-Type": "application/json",
-        Authorization: this.generateSignature("POST", url),
       }
 
       const response = await fetch(url, {
