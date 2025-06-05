@@ -3,6 +3,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Button } from "@/components/ui/button"
+import { ShoppingCart } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Menu | Caribbean Cruises",
@@ -19,9 +21,16 @@ export default function MenuPage() {
               Our Culinary Experience
             </span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
             Indulge in exquisite cuisine prepared by our world-class chefs while enjoying breathtaking ocean views.
           </p>
+
+          <Link href="/menu/order">
+            <Button size="lg" className="bg-ocean-600 hover:bg-ocean-700">
+              <ShoppingCart className="mr-2 h-5 w-5" />
+              Reserve & Pay for Meals
+            </Button>
+          </Link>
         </div>
 
         <div className="mb-12">
@@ -89,12 +98,17 @@ export default function MenuPage() {
             Our menu changes seasonally to incorporate the freshest ingredients from ports we visit. Special dietary
             requirements can be accommodated with advance notice.
           </p>
-          <Link
-            href="/cruises"
-            className="inline-flex items-center justify-center rounded-md bg-ocean-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-ocean-700 focus:outline-none focus:ring-2 focus:ring-ocean-500 focus:ring-offset-2"
-          >
-            Book a Cruise
-          </Link>
+          <div className="flex gap-4 justify-center">
+            <Link href="/menu/order">
+              <Button className="bg-ocean-600 hover:bg-ocean-700">
+                <ShoppingCart className="mr-2 h-4 w-4" />
+                Order Meals Now
+              </Button>
+            </Link>
+            <Link href="/cruises">
+              <Button variant="outline">Book a Cruise</Button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
