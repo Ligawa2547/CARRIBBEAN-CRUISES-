@@ -1,9 +1,13 @@
 import { NextResponse } from "next/server"
-import { supabase } from "@/lib/supabase-server"
+import { createClient } from "@supabase/supabase-js"
+import type { Database } from "@/types/supabase"
+
+// Create a simple client for health checks
+const supabase = createClient<Database>(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
 
 export async function GET() {
   try {
-    // Check database connection
+    // Simple health check - just test the connection
     const { data, error } = await supabase.from("jobs").select("id").limit(1)
 
     if (error) {
@@ -12,28 +16,22 @@ export async function GET() {
           status: "error",
           message: "Database connection failed",
           error: error.message,
-          details: {
-            code: error.code,
-            hint: error.hint,
-          },
         },
         { status: 500 },
       )
     }
 
     return NextResponse.json({
-      status: "ok",
-      message: "System is healthy",
-      environment: process.env.NODE_ENV,
-      database: "connected",
+      status: "healthy",
+      message: "All systems operational",
       timestamp: new Date().toISOString(),
+      database: "connected",
     })
   } catch (error) {
-    console.error("Health check error:", error)
     return NextResponse.json(
       {
         status: "error",
-        message: "System health check failed",
+        message: "Health check failed",
         error: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 },

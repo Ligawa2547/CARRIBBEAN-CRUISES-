@@ -1,5 +1,4 @@
 import { createClient } from "@supabase/supabase-js"
-import { cookies } from "next/headers"
 import type { Database } from "@/types/supabase"
 
 // Server-side Supabase client (only use in Server Components or Server Actions)
@@ -11,24 +10,27 @@ export const supabase = createClient<Database>(supabaseUrl, supabaseKey)
 
 // Browser client with auth (for client components)
 export function createBrowserClient() {
-  return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
+  return createClient<Database>(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
 }
 
 // Server client with cookies for auth (only use in Server Components or Server Actions)
 export function createServerSupabaseClient() {
-  // Only create the cookie handler when this function is called
-  // This ensures cookies() is only called in a request context
+  // This function should only be called in request context
+  // Import cookies dynamically to avoid build-time issues
   try {
-    return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
+    const { cookies } = require("next/headers")
+    const cookieStore = cookies()
+
+    return createClient<Database>(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
       cookies: {
         get(name: string) {
-          return cookies().get(name)?.value
+          return cookieStore.get(name)?.value
         },
         set(name: string, value: string, options: any) {
-          cookies().set({ name, value, ...options })
+          cookieStore.set({ name, value, ...options })
         },
         remove(name: string, options: any) {
-          cookies().delete({ name, ...options })
+          cookieStore.delete({ name, ...options })
         },
       },
     })
