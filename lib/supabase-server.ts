@@ -30,3 +30,6 @@ export function createClient() {
     },
   })
 }
+
+// Export a direct supabase client for server-side operations
+export const supabase = createClient()

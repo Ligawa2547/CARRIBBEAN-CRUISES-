@@ -18,17 +18,25 @@ export function createBrowserClient() {
 export function createServerSupabaseClient() {
   // Only create the cookie handler when this function is called
   // This ensures cookies() is only called in a request context
-  return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
-    cookies: {
-      get(name: string) {
-        return cookies().get(name)?.value
+  try {
+    return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
+      cookies: {
+        get(name: string) {
+          return cookies().get(name)?.value
+        },
+        set(name: string, value: string, options: any) {
+          cookies().set({ name, value, ...options })
+        },
+        remove(name: string, options: any) {
+          cookies().delete({ name, ...options })
+        },
       },
-      set(name: string, value: string, options: any) {
-        cookies().set({ name, value, ...options })
-      },
-      remove(name: string, options: any) {
-        cookies().delete({ name, ...options })
-      },
-    },
-  })
+    })
+  } catch (error) {
+    // Fallback to service role client if cookies are not available
+    return supabase
+  }
 }
+
+// Export the main server client for convenience
+export { supabase as serverSupabase }
