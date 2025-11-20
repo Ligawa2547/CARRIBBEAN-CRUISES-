@@ -9,10 +9,9 @@ import { Briefcase, CheckCircle, CreditCard, Globe, Heart, Handshake, Ship, Tick
 const partnerLogos = [
   { name: "Carnival Cruise Line", logo: "/images/partner-carnival.png" },
   { name: "Celebrity Cruises", logo: "/images/partner-celebrity.png" },
-  { name: "Norwegian Cruise Line", logo: "/images/partner-norwegian.png" },
+  { name: "Royal Caribbean", logo: "/images/partner-royal-caribbean.png" },
   { name: "MSC Cruises", logo: "/images/partner-msc.png" },
   { name: "Disney Cruise Line", logo: "/images/partner-disney.png" },
-  { name: "Royal Caribbean", logo: "/images/partner-royal-caribbean.png" },
 ]
 
 // Certifications and accreditations
@@ -47,7 +46,7 @@ const timeline = [
   {
     year: "2010",
     title: "Company Founded",
-    description: "Caribbean Cruises was established as a specialized recruitment agency for the cruise industry.",
+    description: "Norwegian Cruise Line was established as a specialized recruitment agency for the cruise industry.",
   },
   {
     year: "2012",
@@ -85,7 +84,7 @@ export default function AboutPage() {
       <section className="relative">
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-523876470-612x612.jpg-R3vDPL0GdzHEamZw1sP7YywMtCkfin.jpeg"
+            src="/images/istockphoto-523876470-612x612.jpeg"
             alt="Cruise ship sailing through a fjord with mountains"
             fill
             className="object-cover"
@@ -100,7 +99,7 @@ export default function AboutPage() {
               About Us
             </Badge>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4 text-white drop-shadow-sm">
-              Caribbean Cruises
+              Norwegian Cruise Line
             </h1>
             <p className="text-white/90 text-lg md:text-xl mb-8">
               The Official Recruitment Partner and Ticket Provider for the World's Leading Cruise Lines
@@ -117,7 +116,7 @@ export default function AboutPage() {
               <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-6">Our Story</h2>
               <div className="space-y-4 text-muted-foreground">
                 <p>
-                  Caribbean Cruises is the premier recruitment partner and ticket provider for the world's leading
+                  Norwegian Cruise Line is the premier recruitment partner and ticket provider for the world's leading
                   cruise lines. Founded in 2010, we have established ourselves as the industry leader in connecting
                   talented professionals with exciting career opportunities aboard luxury cruise ships around the world.
                 </p>
@@ -143,7 +142,7 @@ export default function AboutPage() {
 
             <div className="relative h-[400px] rounded-xl overflow-hidden">
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-458115989-612x612.jpg-RplCqufQCEEykO51cHF3tKjHRbSLEN.jpeg"
+                src="/images/istockphoto-458115989-612x612.jpeg"
                 alt="Cruise ship sailing on deep blue waters"
                 fill
                 className="object-cover"
@@ -154,7 +153,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-16">
             <div className="order-2 lg:order-1 relative h-[400px] rounded-xl overflow-hidden">
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-599881398-612x612.jpg-eFmo84tEmWwiTXdIyi3XGSvbZKrDea.jpeg"
+                src="/images/istockphoto-599881398-612x612.jpeg"
                 alt="Cruise ship sailing near a tropical island"
                 fill
                 className="object-cover"
@@ -330,8 +329,8 @@ export default function AboutPage() {
                 Our Certifications & Accreditations
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Caribbean Cruises maintains the highest standards in the industry through official certifications and
-                memberships
+                Norwegian Cruise Line maintains the highest standards in the industry through official certifications
+                and memberships
               </p>
             </div>
 
@@ -359,7 +358,7 @@ export default function AboutPage() {
                   <h3 className="text-lg font-semibold mb-2">Official Registration Information</h3>
                   <ul className="space-y-2 text-sm text-muted-foreground">
                     <li>
-                      <strong>Company Name:</strong> Caribbean Cruises Ltd.
+                      <strong>Company Name:</strong> Norwegian Cruise Line Ltd.
                     </li>
                     <li>
                       <strong>Document Number:</strong> P07000028143
@@ -378,11 +377,8 @@ export default function AboutPage() {
                     </li>
                     <li>
                       <strong>Website:</strong>{" "}
-                      <a
-                        href="https://www.caribbeancruises.site"
-                        className="text-ocean-600 dark:text-ocean-400 hover:underline"
-                      >
-                        www.caribbeancruises.site
+                      <a href="https://www.ncl.com" className="text-ocean-600 dark:text-ocean-400 hover:underline">
+                        www.ncl.com
                       </a>
                     </li>
                     <li>
@@ -399,7 +395,7 @@ export default function AboutPage() {
             <div className="text-center mb-12">
               <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">Our Journey</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                The evolution of Caribbean Cruises from a small recruitment agency to the industry leader
+                The evolution of Norwegian Cruise Line from a small recruitment agency to the industry leader
               </p>
             </div>
 
@@ -426,7 +422,7 @@ export default function AboutPage() {
             <div className="text-center mb-12">
               <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">Our Core Values</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                These principles guide everything we do at Caribbean Cruises
+                These principles guide everything we do at Norwegian Cruise Line
               </p>
             </div>
 
@@ -503,8 +499,8 @@ export default function AboutPage() {
                   <h3 className="text-lg font-semibold mb-1">Michael Thompson</h3>
                   <p className="text-sm text-ocean-600 dark:text-ocean-400 mb-3">Chief Executive Officer</p>
                   <p className="text-sm text-muted-foreground">
-                    Former Cruise Director with over 20 years of experience in the cruise industry. Founded Caribbean
-                    Cruises in 2010.
+                    Former Cruise Director with over 20 years of experience in the cruise industry. Founded Norwegian
+                    Cruise Line in 2010.
                   </p>
                 </CardContent>
               </Card>
@@ -542,7 +538,7 @@ export default function AboutPage() {
             <h2 className="text-2xl font-bold tracking-tight mb-6">Legal Information</h2>
             <div className="space-y-4 text-sm text-muted-foreground">
               <p>
-                <strong>Caribbean Cruises Ltd.</strong> is a registered company (Document No. P07000028143) with
+                <strong>Norwegian Cruise Line Ltd.</strong> is a registered company (Document No. P07000028143) with
                 headquarters in Port Everglades Terminal, Fort Lauderdale, Florida 33316, USA. We are licensed and
                 bonded as a recruitment agency (License No. 20-8572085) and travel agency (License No. ST-32452).
               </p>
@@ -557,14 +553,11 @@ export default function AboutPage() {
                 passengers are protected by relevant consumer protection laws.
               </p>
               <p>
-                Caribbean Cruises maintains professional liability insurance and adheres to strict data protection
+                Norwegian Cruise Line maintains professional liability insurance and adheres to strict data protection
                 policies in compliance with relevant privacy laws. For more information about our legal status or to
                 verify our credentials, please contact our legal department at{" "}
-                <a
-                  href="mailto:legal@caribbeancruises.site"
-                  className="text-ocean-600 dark:text-ocean-400 hover:underline"
-                >
-                  legal@caribbeancruises.site
+                <a href="mailto:legal@ncl.com" className="text-ocean-600 dark:text-ocean-400 hover:underline">
+                  legal@ncl.com
                 </a>{" "}
                 or by phone at +1 (216) 777-7288.
               </p>
@@ -589,7 +582,7 @@ export default function AboutPage() {
           <div className="relative overflow-hidden rounded-2xl">
             <div className="absolute inset-0">
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-522033573-612x612.jpg-94FZLoMUwaC4c55oNXaI1g41xABzEw.jpeg"
+                src="/images/istockphoto-522033573-612x612.jpeg"
                 alt="Cruise ship deck with lounge chairs"
                 fill
                 className="object-cover"
@@ -601,8 +594,8 @@ export default function AboutPage() {
               <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">Ready to Start Your Journey?</h2>
               <p className="text-white/90 max-w-2xl mx-auto mb-8">
                 Whether you're an experienced professional looking for a change of scenery, a newcomer eager to embark
-                on an exciting career path, or a traveler planning your next vacation, Caribbean Cruises is your gateway
-                to extraordinary opportunities on the high seas.
+                on an exciting career path, or a traveler planning your next vacation, Norwegian Cruise Line is your
+                gateway to extraordinary opportunities on the high seas.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <Button asChild size="lg" className="bg-white text-ocean-800 hover:bg-white/90 font-medium">

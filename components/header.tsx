@@ -26,13 +26,13 @@ export default function Header() {
           <div className="relative h-8 w-8 md:h-10 md:w-10">
             <Image
               src="/images/caribbean-cruises-logo.png"
-              alt="Caribbean Cruises Logo"
+              alt="Norwegian Cruise Line Logo"
               fill
               className="object-contain"
             />
           </div>
           <span className="font-bold text-lg bg-gradient-to-r from-ocean-600 to-cruise-600 bg-clip-text text-transparent">
-            Caribbean Cruises
+            Norwegian Cruise Line
           </span>
         </Link>
 
@@ -130,13 +130,13 @@ export default function Header() {
                 <div className="relative h-8 w-8">
                   <Image
                     src="/images/caribbean-cruises-logo.png"
-                    alt="Caribbean Cruises Logo"
+                    alt="Norwegian Cruise Line Logo"
                     fill
                     className="object-contain"
                   />
                 </div>
                 <span className="bg-gradient-to-r from-ocean-600 to-cruise-600 bg-clip-text text-transparent">
-                  Caribbean Cruises
+                  Norwegian Cruise Line
                 </span>
               </Link>
               <nav className="flex flex-col gap-4">
@@ -208,7 +208,7 @@ export default function Header() {
                     </Link>
                     <Button
                       variant="outline"
-                      className="mt-2 justify-start"
+                      className="mt-2 justify-start bg-transparent"
                       onClick={() => {
                         signOut()
                         setIsOpen(false)

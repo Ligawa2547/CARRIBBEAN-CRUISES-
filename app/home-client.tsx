@@ -74,8 +74,7 @@ const upcomingCruises = [
     date: "June 15, 2025",
     cruiseLine: "Royal Caribbean",
     ship: "Wonder of the Seas",
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-104241367-612x612.jpg-5jL2o3b1iHARTRrkWgA5CXyRnC9h6b.jpeg",
+    image: "/images/istockphoto-104241367-612x612.jpeg",
   },
   {
     id: 2,
@@ -87,8 +86,7 @@ const upcomingCruises = [
     date: "July 8, 2025",
     cruiseLine: "Celebrity Cruises",
     ship: "Celebrity Beyond",
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-527091631-612x612.jpg-1UfelPfR6tzmFC6RZpkl1NfmTUFYpM.jpeg",
+    image: "/images/istockphoto-527091631-612x612.jpeg",
   },
   {
     id: 3,
@@ -100,8 +98,7 @@ const upcomingCruises = [
     date: "November 12, 2025",
     cruiseLine: "MSC Cruises",
     ship: "MSC Seashore",
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-523876470-612x612.jpg-R3vDPL0GdzHEamZw1sP7YywMtCkfin.jpeg",
+    image: "/images/istockphoto-523876470-612x612.jpeg",
   },
 ]
 
@@ -109,10 +106,9 @@ const upcomingCruises = [
 const partnerLogos = [
   { name: "Carnival Cruise Line", logo: "/images/partner-carnival.png" },
   { name: "Celebrity Cruises", logo: "/images/partner-celebrity.png" },
-  { name: "Norwegian Cruise Line", logo: "/images/partner-norwegian.png" },
+  { name: "Royal Caribbean", logo: "/images/partner-royal-caribbean.png" },
   { name: "MSC Cruises", logo: "/images/partner-msc.png" },
   { name: "Disney Cruise Line", logo: "/images/partner-disney.png" },
-  { name: "Royal Caribbean", logo: "/images/partner-royal-caribbean.png" },
 ]
 
 // Testimonials
@@ -120,25 +116,25 @@ const testimonials = [
   {
     id: 1,
     name: "Maria Rodriguez",
-    position: "Head Chef, 5 years with Caribbean Cruises",
+    position: "Head Chef, 5 years with Norwegian Cruise Line",
     quote:
-      "Working with Caribbean Cruises has been the best career decision I've made. The recruitment process was smooth, and they found me the perfect position that matched my skills and aspirations.",
+      "Working with Norwegian Cruise Line has been the best career decision I've made. The recruitment process was smooth, and they found me the perfect position that matched my skills and aspirations.",
     avatar: "/placeholder.svg?height=80&width=80",
   },
   {
     id: 2,
     name: "James Wilson",
-    position: "Entertainment Director, 3 years with Caribbean Cruises",
+    position: "Entertainment Director, 3 years with Norwegian Cruise Line",
     quote:
-      "Caribbean Cruises not only helped me find a job but also guided me through the entire onboarding process. Their support team is always available to answer questions and provide assistance.",
+      "Norwegian Cruise Line not only helped me find a job but also guided me through the entire onboarding process. Their support team is always available to answer questions and provide assistance.",
     avatar: "/placeholder.svg?height=80&width=80",
   },
   {
     id: 3,
     name: "Sofia Chen",
-    position: "Guest Relations Manager, 4 years with Caribbean Cruises",
+    position: "Guest Relations Manager, 4 years with Norwegian Cruise Line",
     quote:
-      "The opportunities for career advancement are incredible. Caribbean Cruises continues to support my professional development and has helped me progress from an entry-level position to management.",
+      "The opportunities for career advancement are incredible. Norwegian Cruise Line continues to support my professional development and has helped me progress from an entry-level position to management.",
     avatar: "/placeholder.svg?height=80&width=80",
   },
 ]
@@ -148,22 +144,19 @@ const featuredVideos = [
   {
     id: "video1",
     title: "Caribbean Cruise Experience",
-    thumbnail:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-523876470-612x612.jpg-R3vDPL0GdzHEamZw1sP7YywMtCkfin.jpeg",
+    thumbnail: "/images/istockphoto-523876470-612x612.jpeg",
     duration: "3:45",
   },
   {
     id: "video2",
     title: "Life Onboard Our Ships",
-    thumbnail:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-599881398-612x612.jpg-eFmo84tEmWwiTXdIyi3XGSvbZKrDea.jpeg",
+    thumbnail: "/images/istockphoto-599881398-612x612.jpeg",
     duration: "5:12",
   },
   {
     id: "video3",
     title: "Culinary Delights at Sea",
-    thumbnail:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-458115989-612x612.jpg-RplCqufQCEEykO51cHF3tKjHRbSLEN.jpeg",
+    thumbnail: "/images/istockphoto-458115989-612x612.jpeg",
     duration: "4:30",
   },
 ]
@@ -183,7 +176,7 @@ export function HomeClient() {
         <section className="relative">
           <div className="absolute inset-0 z-0">
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-523876470-612x612.jpg-R3vDPL0GdzHEamZw1sP7YywMtCkfin.jpeg"
+              src="/images/istockphoto-523876470-612x612.jpeg"
               alt="Cruise ship sailing through a fjord with mountains"
               fill
               className="object-cover"
@@ -201,8 +194,8 @@ export function HomeClient() {
                 Set Sail on Your Dream Career
               </h1>
               <p className="text-white/90 text-lg md:text-xl mb-8">
-                Join the Caribbean Cruises family and discover exciting job opportunities on the world's most luxurious
-                cruise ships. We are the exclusive recruitment partner for leading cruise lines.
+                Join the Norwegian Cruise Line family and discover exciting job opportunities on the world's most
+                luxurious cruise ships. We are the exclusive recruitment partner for leading cruise lines.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" className="bg-ocean-600 hover:bg-ocean-700 text-white font-medium">
@@ -259,8 +252,8 @@ export function HomeClient() {
                 Your Gateway to Maritime Opportunities
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                Caribbean Cruises is the official recruitment partner and ticket provider for the world's leading cruise
-                lines. Explore our services below.
+                Norwegian Cruise Line is the official recruitment partner and ticket provider for the world's leading
+                cruise lines. Explore our services below.
               </p>
             </div>
 
@@ -308,7 +301,7 @@ export function HomeClient() {
                   </div>
                   <div className="relative h-[400px] rounded-xl overflow-hidden">
                     <Image
-                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-599881398-612x612.jpg-eFmo84tEmWwiTXdIyi3XGSvbZKrDea.jpeg"
+                      src="/images/istockphoto-599881398-612x612.jpeg"
                       alt="Cruise ship staff providing service"
                       fill
                       className="object-cover"
@@ -337,7 +330,7 @@ export function HomeClient() {
                         </div>
                         <p className="text-sm mb-4">{job.description}</p>
                         <div className="text-sm font-medium text-ocean-600 dark:text-ocean-400 mb-4">{job.salary}</div>
-                        <Button asChild variant="outline" size="sm" className="w-full">
+                        <Button asChild variant="outline" size="sm" className="w-full bg-transparent">
                           <Link href={`/jobs/${job.id}`}>View Details</Link>
                         </Button>
                       </CardContent>
@@ -391,7 +384,7 @@ export function HomeClient() {
                   </div>
                   <div className="order-1 md:order-2 relative h-[400px] rounded-xl overflow-hidden">
                     <Image
-                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-522033573-612x612.jpg-94FZLoMUwaC4c55oNXaI1g41xABzEw.jpeg"
+                      src="/images/istockphoto-522033573-612x612.jpeg"
                       alt="Luxury cruise ship in the Caribbean"
                       fill
                       className="object-cover"
@@ -432,7 +425,7 @@ export function HomeClient() {
                         <div className="text-sm font-medium text-ocean-600 dark:text-ocean-400 mb-4">
                           {cruise.price}
                         </div>
-                        <Button asChild variant="outline" size="sm" className="w-full">
+                        <Button asChild variant="outline" size="sm" className="w-full bg-transparent">
                           <Link href={`/cruises/${cruise.id}`}>View Details</Link>
                         </Button>
                       </CardContent>
@@ -453,10 +446,10 @@ export function HomeClient() {
               <TabsContent value="about" className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                   <div>
-                    <h3 className="text-2xl font-bold mb-4">The Caribbean Cruises Difference</h3>
+                    <h3 className="text-2xl font-bold mb-4">The Norwegian Cruise Line Difference</h3>
                     <p className="text-muted-foreground mb-6">
-                      Founded in 2010, Caribbean Cruises has grown to become the premier recruitment partner and ticket
-                      provider for the world's leading cruise lines. Our expertise in the maritime industry and
+                      Founded in 2010, Norwegian Cruise Line has grown to become the premier recruitment partner and
+                      ticket provider for the world's leading cruise lines. Our expertise in the maritime industry and
                       commitment to excellence set us apart.
                     </p>
                     <div className="space-y-4">
@@ -508,7 +501,7 @@ export function HomeClient() {
         <section className="py-16 bg-ocean-50 dark:bg-ocean-950/30 border-y border-ocean-100 dark:border-ocean-800/20">
           <div className="container px-4 md:px-6">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold tracking-tight mb-4">Why Choose Caribbean Cruises?</h2>
+              <h2 className="text-3xl font-bold tracking-tight mb-4">Why Choose Norwegian Cruise Line?</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
                 We offer unparalleled opportunities and services in the cruise industry
               </p>
@@ -593,7 +586,7 @@ export function HomeClient() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold tracking-tight mb-4">Success Stories</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Hear from professionals who found their dream careers through Caribbean Cruises
+                Hear from professionals who found their dream careers through Norwegian Cruise Line
               </p>
             </div>
 
@@ -718,7 +711,7 @@ export function HomeClient() {
             </div>
 
             <div className="text-center mt-10">
-              <Button asChild variant="outline" className="gap-2">
+              <Button asChild variant="outline" className="gap-2 bg-transparent">
                 <Link href="/videos">
                   <Film className="h-4 w-4" />
                   View All Videos
@@ -734,7 +727,7 @@ export function HomeClient() {
             <div className="relative overflow-hidden rounded-2xl">
               <div className="absolute inset-0">
                 <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-458115989-612x612.jpg-RplCqufQCEEykO51cHF3tKjHRbSLEN.jpeg"
+                  src="/images/istockphoto-458115989-612x612.jpeg"
                   alt="Cruise ship sailing on deep blue waters"
                   fill
                   className="object-cover"
@@ -745,8 +738,8 @@ export function HomeClient() {
               <div className="relative z-10 px-6 py-12 md:py-16 md:px-12 text-center text-white">
                 <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Ready to Start Your Journey?</h2>
                 <p className="text-white/90 max-w-2xl mx-auto mb-8">
-                  Whether you're looking for an exciting career at sea or planning your next vacation, Caribbean Cruises
-                  is your trusted partner for all things cruise-related.
+                  Whether you're looking for an exciting career at sea or planning your next vacation, Norwegian Cruise
+                  Line is your trusted partner for all things cruise-related.
                 </p>
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
                   <Button asChild size="lg" className="bg-white text-ocean-800 hover:bg-white/90 font-medium">

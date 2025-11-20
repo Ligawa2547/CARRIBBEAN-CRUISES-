@@ -11,12 +11,12 @@ export default function Footer() {
             <div className="flex items-center mb-4">
               <Image
                 src="/images/caribbean-cruises-logo.png"
-                alt="Caribbean Cruises Logo"
+                alt="Norwegian Cruise Line Logo"
                 width={40}
                 height={40}
                 className="mr-2"
               />
-              <h3 className="text-xl font-bold">Caribbean Cruises</h3>
+              <h3 className="text-xl font-bold">Norwegian Cruise Line</h3>
             </div>
             <p className="text-ocean-200 mb-4 text-sm">
               The official recruitment partner and ticket provider for the world's leading cruise lines.
@@ -38,11 +38,11 @@ export default function Footer() {
               </div>
               <div className="flex items-center text-sm">
                 <Mail className="h-5 w-5 mr-2 text-ocean-400" />
-                <span className="text-ocean-200">info@caribbeancruises.site</span>
+                <span className="text-ocean-200">info@ncl.com</span>
               </div>
               <div className="flex items-center text-sm">
                 <Globe className="h-5 w-5 mr-2 text-ocean-400" />
-                <span className="text-ocean-200">www.caribbeancruises.site</span>
+                <span className="text-ocean-200">www.ncl.com</span>
               </div>
             </div>
           </div>
@@ -134,7 +134,7 @@ export default function Footer() {
 
         <div className="border-t border-ocean-800 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-ocean-300 text-sm mb-4 md:mb-0">
-            &copy; {new Date().getFullYear()} Caribbean Cruises. All rights reserved.
+            &copy; {new Date().getFullYear()} Norwegian Cruise Line. All rights reserved.
           </p>
           <div className="flex space-x-4">
             <a href="#" className="text-ocean-300 hover:text-white transition-colors">
