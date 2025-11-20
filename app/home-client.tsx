@@ -738,8 +738,8 @@ export function HomeClient() {
               <div className="relative z-10 px-6 py-12 md:py-16 md:px-12 text-center text-white">
                 <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Ready to Start Your Journey?</h2>
                 <p className="text-white/90 max-w-2xl mx-auto mb-8">
-                  Whether you're looking for an exciting career at sea or planning your next vacation, Norwegian Cruise
-                  Line is your trusted partner for all things cruise-related.
+                  Whether you're pursuing a dynamic career on the ocean or planning your upcoming getaway,
+                  Norwegian Cruise Line is your reliable choice for everything related to cruising.
                 </p>
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
                   <Button asChild size="lg" className="bg-white text-ocean-800 hover:bg-white/90 font-medium">
