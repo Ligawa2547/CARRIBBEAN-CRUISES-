@@ -44,34 +44,34 @@ const certifications = [
 // Timeline events
 const timeline = [
   {
-    year: "2010",
+    year: "1966",
     title: "Company Founded",
-    description: "Norwegian Cruise Line was established as a specialized recruitment agency for the cruise industry.",
+    description: "Norwegian Caribbean Line (now Norwegian Cruise Line) was established by Knut Kloster and Ted Arison, pioneering Caribbean cruising.",
   },
   {
-    year: "2012",
-    title: "First Major Partnership",
-    description: "Secured our first exclusive recruitment partnership with Royal Caribbean International.",
+    year: "1968",
+    title: "First Ship Launched",
+    description: "The company introduced its first new-generation ship, Starward, marking the start of modern cruising.",
   },
   {
-    year: "2015",
-    title: "Expanded Services",
-    description: "Added cruise ticket sales and booking services to our portfolio.",
+    year: "1977",
+    title: "Private Island Acquisition",
+    description: "Acquired Great Stirrup Cay in the Bahamas, creating one of the cruise industry’s first private island destinations.",
   },
   {
-    year: "2018",
-    title: "International Expansion",
-    description: "Opened offices in Miami, London, and Manila to better serve our global clientele.",
+    year: "1987",
+    title: "Rebranding",
+    description: "Renamed to Norwegian Cruise Line to reflect its expanding global cruise offerings beyond the Caribbean.",
   },
   {
-    year: "2020",
-    title: "Digital Transformation",
-    description: "Launched our comprehensive online platform for job applications and cruise bookings.",
+    year: "2000",
+    title: "Acquisition by Star Cruises",
+    description: "Norwegian Cruise Line was acquired by Star Cruises (Genting Hong Kong), enabling fleet expansion and modernization.",
   },
   {
-    year: "2023",
-    title: "Industry Recognition",
-    description: "Named 'Top Maritime Recruitment Agency' by Cruise Industry Awards for the third consecutive year.",
+    year: "2014",
+    title: "Acquisition of Prestige Cruises",
+    description: "Acquired Prestige Cruises International, parent company of Oceania Cruises and Regent Seven Seas, expanding luxury cruise offerings.",
   },
 ]
 
@@ -102,7 +102,7 @@ export default function AboutPage() {
               Norwegian Cruise Line
             </h1>
             <p className="text-white/90 text-lg md:text-xl mb-8">
-              The Official Recruitment Partner and Ticket Provider for the World's Leading Cruise Lines
+              The Official Careers and Cruise Opportunities with Norwegian Cruise Line – Join the Fleet, Explore the World.
             </p>
           </div>
         </div>
@@ -116,26 +116,26 @@ export default function AboutPage() {
               <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-6">Our Story</h2>
               <div className="space-y-4 text-muted-foreground">
                 <p>
-                  Norwegian Cruise Line is the premier recruitment partner and ticket provider for the world's leading
-                  cruise lines. Founded in 2010, we have established ourselves as the industry leader in connecting
-                  talented professionals with exciting career opportunities aboard luxury cruise ships around the world.
+                  Norwegian Cruise Line is a leading provider of career opportunities and unforgettable cruise experiences.
+                  Founded in 1966, we have established ourselves as a pioneer in modern cruising, connecting talented professionals with rewarding roles aboard
+                  our award-winning fleet while offering guests exceptional voyages around the world.
                 </p>
                 <p>
-                  Our exclusive partnerships with major cruise lines give us unparalleled access to job openings across
-                  all departments, from culinary arts and entertainment to engineering and guest services. As the
-                  official recruitment partner for these prestigious companies, we offer positions that are not
-                  available through any other agency.
+                  At Norwegian Cruise Line, we offer unparalleled access to career opportunities across all shipboard departments,
+                  from culinary arts and entertainment to engineering and guest services. As a leading cruise operator,
+                  we provide positions that give talented professionals a unique chance to grow and excel aboard our award-winning fleet.
+
                 </p>
                 <p>
-                  In addition to our recruitment services, we are an authorized ticket provider for cruise vacations,
-                  offering exclusive deals and packages that cannot be found elsewhere. Our comprehensive approach to
-                  the cruise industry allows us to serve both professionals seeking careers at sea and travelers looking
-                  for unforgettable vacation experiences.
+                  Beyond offering exceptional career opportunities, Norwegian Cruise Line is your trusted provider of cruise vacations,
+                  featuring exclusive deals and packages you won’t find anywhere else. This comprehensive approach allows us to serve
+                  both professionals pursuing rewarding careers at sea and travelers seeking unforgettable journeys
+                  around the world.
                 </p>
                 <p>
-                  With offices in Miami, London, and Manila, we have a global presence that allows us to serve clients
-                  and candidates from around the world. Our team of industry experts brings decades of combined
-                  experience in maritime recruitment and cruise operations.
+                  With a global presence and offices strategically located in key cruise hubs, Norwegian Cruise Line serves professionals and travelers from around the world.
+                  Our team of industry experts brings decades of combined experience in cruise operations,
+                  ensuring exceptional service both on board and onshore.
                 </p>
               </div>
             </div>
@@ -169,8 +169,8 @@ export default function AboutPage() {
                     Recruitment Services
                   </h3>
                   <p className="mb-3">
-                    As the official recruitment partner for major cruise lines, we provide end-to-end recruitment
-                    solutions for all positions aboard cruise ships. Our services include:
+                    As a leading cruise operator, Norwegian Cruise Line offers comprehensive recruitment solutions for all shipboard positions.
+                    Our services cover every step of the hiring process, ensuring talented professionals find the right role aboard our fleet.
                   </p>
                   <ul className="space-y-2">
                     <li className="flex items-start">
@@ -259,8 +259,8 @@ export default function AboutPage() {
               </Badge>
               <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">Our Exclusive Cruise Line Partners</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                We are proud to be the exclusive recruitment partner and authorized ticket provider for these leading
-                cruise lines
+                Norwegian Cruise Line proudly offers exclusive career opportunities and authorized cruise bookings,
+                providing unmatched experiences for both crew and guests.
               </p>
             </div>
 
@@ -361,7 +361,7 @@ export default function AboutPage() {
                       <strong>Company Name:</strong> Norwegian Cruise Line Ltd.
                     </li>
                     <li>
-                      <strong>Document Number:</strong> P07000028143
+                      <strong>Document Number:</strong> P07000027149
                     </li>
                     <li>
                       <strong>Federal Employer Identification Number (FEI/EIN):</strong> 20-8572085
@@ -422,7 +422,7 @@ export default function AboutPage() {
             <div className="text-center mb-12">
               <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">Our Core Values</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                These principles guide everything we do at Norwegian Cruise Line
+                These core values guide everything we do at Norwegian Cruise Line
               </p>
             </div>
 
@@ -432,10 +432,10 @@ export default function AboutPage() {
                   <div className="w-12 h-12 rounded-full bg-ocean-100 dark:bg-ocean-800/50 flex items-center justify-center mx-auto mb-4">
                     <Heart className="h-6 w-6 text-ocean-600 dark:text-ocean-400" />
                   </div>
-                  <h3 className="text-lg font-semibold mb-2">Passion</h3>
+                  <h3 className="text-lg font-semibold mb-2">Dedication</h3>
                   <p className="text-sm text-muted-foreground">
-                    We are passionate about connecting people with life-changing career opportunities and unforgettable
-                    cruise experiences.
+                    At Norwegian Cruise Line, we are passionate about connecting talented professionals with life-changing careers at sea and providing travelers
+                   with unforgettable cruise experiences around the world.
                   </p>
                 </CardContent>
               </Card>
@@ -447,8 +447,8 @@ export default function AboutPage() {
                   </div>
                   <h3 className="text-lg font-semibold mb-2">Global Perspective</h3>
                   <p className="text-sm text-muted-foreground">
-                    We embrace diversity and celebrate the international nature of the cruise industry, serving clients
-                    from around the world.
+                    At Norwegian Cruise Line, we embrace diversity and celebrate the international spirit of cruising, welcoming professionals
+                    and guests from all corners of the world.
                   </p>
                 </CardContent>
               </Card>
@@ -460,8 +460,8 @@ export default function AboutPage() {
                   </div>
                   <h3 className="text-lg font-semibold mb-2">Excellence</h3>
                   <p className="text-sm text-muted-foreground">
-                    We are committed to excellence in every aspect of our services, from recruitment to customer
-                    support.
+                    At Norwegian Cruise Line, we are committed to excellence in every aspect of our operations,
+                    from recruiting top talent to delivering outstanding service for our guests.
                   </p>
                 </CardContent>
               </Card>
@@ -471,10 +471,10 @@ export default function AboutPage() {
                   <div className="w-12 h-12 rounded-full bg-ocean-100 dark:bg-ocean-800/50 flex items-center justify-center mx-auto mb-4">
                     <Handshake className="h-6 w-6 text-ocean-600 dark:text-ocean-400" />
                   </div>
-                  <h3 className="text-lg font-semibold mb-2">Integrity</h3>
+                  <h3 className="text-lg font-semibold mb-2">Transparency</h3>
                   <p className="text-sm text-muted-foreground">
-                    We operate with transparency and honesty in all our interactions with candidates, clients, and
-                    cruise lines.
+                    At Norwegian Cruise Line, we operate with transparency and integrity in all our interactions
+                    with crew members, guests, and industry partners.
                   </p>
                 </CardContent>
               </Card>
@@ -496,11 +496,11 @@ export default function AboutPage() {
                   <div className="relative w-24 h-24 rounded-full overflow-hidden mx-auto mb-4">
                     <Image src="/placeholder.svg?height=96&width=96" alt="CEO Portrait" fill className="object-cover" />
                   </div>
-                  <h3 className="text-lg font-semibold mb-1">Michael Thompson</h3>
+                  <h3 className="text-lg font-semibold mb-1">Isabella Chen</h3>
                   <p className="text-sm text-ocean-600 dark:text-ocean-400 mb-3">Chief Executive Officer</p>
                   <p className="text-sm text-muted-foreground">
-                    Former Cruise Director with over 20 years of experience in the cruise industry. Founded Norwegian
-                    Cruise Line in 2010.
+                    Over 25 years in global cruise operations, Isabella has led innovation and growth
+                    across international fleets.
                   </p>
                 </CardContent>
               </Card>
@@ -510,10 +510,10 @@ export default function AboutPage() {
                   <div className="relative w-24 h-24 rounded-full overflow-hidden mx-auto mb-4">
                     <Image src="/placeholder.svg?height=96&width=96" alt="COO Portrait" fill className="object-cover" />
                   </div>
-                  <h3 className="text-lg font-semibold mb-1">Sophia Martinez</h3>
+                  <h3 className="text-lg font-semibold mb-1">Liam Reynolds</h3>
                   <p className="text-sm text-ocean-600 dark:text-ocean-400 mb-3">Chief Operations Officer</p>
                   <p className="text-sm text-muted-foreground">
-                    Former HR Director for a major cruise line with expertise in maritime recruitment and operations.
+                    Former Fleet Operations Director, Liam specializes in shipboard logistics, crew management, and operational excellence.
                   </p>
                 </CardContent>
               </Card>
@@ -523,10 +523,10 @@ export default function AboutPage() {
                   <div className="relative w-24 h-24 rounded-full overflow-hidden mx-auto mb-4">
                     <Image src="/placeholder.svg?height=96&width=96" alt="CMO Portrait" fill className="object-cover" />
                   </div>
-                  <h3 className="text-lg font-semibold mb-1">David Chen</h3>
+                  <h3 className="text-lg font-semibold mb-1">Aisha Patel</h3>
                   <p className="text-sm text-ocean-600 dark:text-ocean-400 mb-3">Chief Marketing Officer</p>
                   <p className="text-sm text-muted-foreground">
-                    Marketing executive with extensive experience in the travel and hospitality industry.
+                    Aisha brings over 15 years of experience in global marketing and brand strategy for travel and hospitality brands.
                   </p>
                 </CardContent>
               </Card>
@@ -539,11 +539,11 @@ export default function AboutPage() {
             <div className="space-y-4 text-sm text-muted-foreground">
               <p>
                 <strong>Norwegian Cruise Line Ltd.</strong> is a registered company (Document No. P07000028143) with
-                headquarters in Port Everglades Terminal, Fort Lauderdale, Florida 33316, USA. We are licensed and
+                headquarters in 7665 Corporate Center Drive, Miami, Florida 33126, USA. We are licensed and
                 bonded as a recruitment agency (License No. 20-8572085) and travel agency (License No. ST-32452).
               </p>
               <p>
-                We are an official recruitment partner for multiple cruise lines, authorized to recruit and place
+                Norwegian Cruise Line is an official operator and authorized recruitment provider for onboard positions across our fleet
                 candidates in various positions aboard their vessels. Our recruitment practices comply with the Maritime
                 Labour Convention (MLC 2006) and all relevant international maritime regulations.
               </p>
@@ -556,7 +556,7 @@ export default function AboutPage() {
                 Norwegian Cruise Line maintains professional liability insurance and adheres to strict data protection
                 policies in compliance with relevant privacy laws. For more information about our legal status or to
                 verify our credentials, please contact our legal department at{" "}
-                <a href="mailto:legal@ncl.com" className="text-ocean-600 dark:text-ocean-400 hover:underline">
+                <a href="mailto:legal@nclsail.com" className="text-ocean-600 dark:text-ocean-400 hover:underline">
                   legal@ncl.com
                 </a>{" "}
                 or by phone at +1 (216) 777-7288.
@@ -593,9 +593,9 @@ export default function AboutPage() {
             <div className="relative z-10 px-6 py-12 md:py-16 md:px-12 text-center text-white">
               <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">Ready to Start Your Journey?</h2>
               <p className="text-white/90 max-w-2xl mx-auto mb-8">
-                Whether you're an experienced professional looking for a change of scenery, a newcomer eager to embark
-                on an exciting career path, or a traveler planning your next vacation, Norwegian Cruise Line is your
-                gateway to extraordinary opportunities on the high seas.
+                Whether you’re an experienced professional seeking a fresh challenge, a newcomer ready to start
+                an exciting career at sea, or a traveler planning your next unforgettable voyage, Norwegian Cruise
+                Line is your gateway to extraordinary opportunities aboard our world-class fleet.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <Button asChild size="lg" className="bg-white text-ocean-800 hover:bg-white/90 font-medium">
