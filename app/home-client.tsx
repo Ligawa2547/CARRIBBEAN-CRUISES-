@@ -194,7 +194,7 @@ export function HomeClient() {
                 Set Sail on Your Dream Career
               </h1>
               <p className="text-white/90 text-lg md:text-xl mb-8">
-                Join the Norwegian Cruise Line family and discover exciting job opportunities on the world's most
+                Join the Norwegian Cruise Line family and discover exciting career opportunities across the world’s most innovative and award-winning fleet.
                 luxurious cruise ships. We are the exclusive recruitment partner for leading cruise lines.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
