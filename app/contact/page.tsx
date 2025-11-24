@@ -166,9 +166,9 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-medium text-indigo-950 dark:text-white">Address</h3>
                     <p className="text-xs md:text-sm text-slate-600 dark:text-slate-300">
-                      Port Everglades Terminal
+                      7665 Corporate Center Drive
                       <br />
-                      Fort Lauderdale, FL 33316
+                      Miami, Florida 33126
                       <br />
                       United States
                     </p>
@@ -178,21 +178,21 @@ export default function ContactPage() {
                   <Phone className="mr-3 h-5 w-5 text-indigo-600 dark:text-indigo-400" />
                   <div>
                     <h3 className="font-medium text-indigo-950 dark:text-white">Phone</h3>
-                    <p className="text-xs md:text-sm text-slate-600 dark:text-slate-300">+1 (216) 777-7288</p>
+                    <p className="text-xs md:text-sm text-slate-600 dark:text-slate-300">+1 (216) 111-222</p>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <Mail className="mr-3 h-5 w-5 text-indigo-600 dark:text-indigo-400" />
                   <div>
                     <h3 className="font-medium text-indigo-950 dark:text-white">Email</h3>
-                    <p className="text-xs md:text-sm text-slate-600 dark:text-slate-300">info@caribbeancruises.site</p>
+                    <p className="text-xs md:text-sm text-slate-600 dark:text-slate-300">info@nclsail.com</p>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <Globe className="mr-3 h-5 w-5 text-indigo-600 dark:text-indigo-400" />
                   <div>
                     <h3 className="font-medium text-indigo-950 dark:text-white">Website</h3>
-                    <p className="text-xs md:text-sm text-slate-600 dark:text-slate-300">www.caribbeancruises.site</p>
+                    <p className="text-xs md:text-sm text-slate-600 dark:text-slate-300">www.nclasail.com</p>
                   </div>
                 </div>
               </CardContent>
