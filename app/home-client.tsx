@@ -95,7 +95,7 @@ const upcomingCruises = [
     departure: "San Juan, Puerto Rico",
     destinations: "Castries (St. Lucia), Bridgetown (Barbados), Oranjestad (Aruba), Willemstad (Curacao)",
     price: "From $1,099",
-    date: "December 12, 2025",
+    date: "December 12, 2026",
     cruiseLine: "Norwegian Cruise Line",
     ship: "Norwegian Viva",
     image: "/images/istockphoto-523876470-612x612.jpeg",
