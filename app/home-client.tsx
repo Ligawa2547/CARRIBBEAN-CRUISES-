@@ -195,7 +195,7 @@ export function HomeClient() {
               </h1>
               <p className="text-white/90 text-lg md:text-xl mb-8">
                 Join the Norwegian Cruise Line family and discover exciting career opportunities across the world’s most innovative and award-winning fleet.
-                luxurious cruise ships. We are the exclusive recruitment partner for leading cruise lines.
+                We are the exclusive recruitment partner for Norwegian Cruise Line and other leading brands in the industry.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" className="bg-ocean-600 hover:bg-ocean-700 text-white font-medium">
@@ -252,8 +252,8 @@ export function HomeClient() {
                 Your Gateway to Maritime Opportunities
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                Norwegian Cruise Line is the official recruitment partner and ticket provider for the world's leading
-                cruise lines. Explore our services below.
+                Norwegian Cruise Line serves as the official recruitment partner and ticketing provider for some of the world’s leading cruise brands.
+                Explore our services below.
               </p>
             </div>
 
@@ -270,9 +270,8 @@ export function HomeClient() {
                   <div>
                     <h3 className="text-2xl font-bold mb-4">Find Your Perfect Position</h3>
                     <p className="text-muted-foreground mb-6">
-                      As the official recruitment partner for leading cruise lines, we offer exclusive access to a wide
-                      range of positions across various departments. Our expert team will guide you through every step
-                      of the application process.
+                      As the official recruitment partner for leading cruise lines, we provide exclusive access to a wide range of positions across multiple departments.
+                      Our expert team will guide you through every step of the application process.
                     </p>
                     <div className="space-y-4">
                       <div className="flex items-start gap-2">
@@ -448,9 +447,8 @@ export function HomeClient() {
                   <div>
                     <h3 className="text-2xl font-bold mb-4">The Norwegian Cruise Line Difference</h3>
                     <p className="text-muted-foreground mb-6">
-                      Founded in 2010, Norwegian Cruise Line has grown to become the premier recruitment partner and
-                      ticket provider for the world's leading cruise lines. Our expertise in the maritime industry and
-                      commitment to excellence set us apart.
+                      Founded in 1966, Norwegian Cruise Line has grown into a global leader in modern cruising, operating a fleet of innovative “Freestyle Cruising” Our expertise in the maritime industry and
+                       ships under its parent company, Norwegian Cruise Line Holdings
                     </p>
                     <div className="space-y-4">
                       <div className="flex items-start gap-2">
