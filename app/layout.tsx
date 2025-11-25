@@ -24,12 +24,12 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Caribbean Cruises - Book Your Dream Voyage",
-    template: "%s | Caribbean Cruises",
+    default: "Norwegian Cruise Line - Book Your Dream Voyage",
+    template: "%s | Norwegian Cruise Line",
   },
   description:
     "Explore the best cruises to the Caribbean. Great prices, all-inclusive packages from Caribbean Cruise Ltd.",
-  metadataBase: new URL("https://caribbeancruises.site"),
+  metadataBase: new URL("https://www.nclsail.com/"),
   alternates: {
     canonical: "/",
   },
@@ -40,22 +40,22 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://caribbeancruises.site/",
-    title: "Caribbean Cruises - Book Your Dream Voyage",
+    url: "https://www.nclsail.com/",
+    title: "Norwegian Cruise Line - Book Your Dream Voyage",
     description: "Explore the best Caribbean cruise packages. Easy booking and great deals.",
     siteName: "Caribbean Cruises",
     images: [
       {
-        url: "https://caribbeancruises.site/images/banner.jpg",
+        url: "https://www.nclsail.com/images/banner.jpg",
         width: 1200,
         height: 630,
-        alt: "Caribbean Cruises Banner",
+        alt: "Norwegian Cruise Line Banner",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Caribbean Cruises - Book Your Dream Voyage",
+    title: "Norwegian Cruise Line - Book Your Dream Voyage",
     description: "Explore the best Caribbean cruise packages. Easy booking and great deals.",
     images: ["https://caribbeancruises.site/images/banner.jpg"],
   },
