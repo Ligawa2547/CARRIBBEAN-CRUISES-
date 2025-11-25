@@ -25,24 +25,24 @@ export default function Footer() {
               <div className="flex items-start text-sm">
                 <MapPin className="h-5 w-5 mr-2 text-ocean-400 flex-shrink-0 mt-0.5" />
                 <span className="text-ocean-200">
-                  Port Everglades Terminal
+                  7665 Corporate Center Drive
                   <br />
-                  Fort Lauderdale, FL 33316
+                  Miami, Florida 33126
                   <br />
                   United States
                 </span>
               </div>
               <div className="flex items-center text-sm">
                 <Phone className="h-5 w-5 mr-2 text-ocean-400" />
-                <span className="text-ocean-200">+1 (216) 777-7288</span>
+                <span className="text-ocean-200">+1 (216) 777-655</span>
               </div>
               <div className="flex items-center text-sm">
                 <Mail className="h-5 w-5 mr-2 text-ocean-400" />
-                <span className="text-ocean-200">info@ncl.com</span>
+                <span className="text-ocean-200">info@nclsail.com</span>
               </div>
               <div className="flex items-center text-sm">
                 <Globe className="h-5 w-5 mr-2 text-ocean-400" />
-                <span className="text-ocean-200">www.ncl.com</span>
+                <span className="text-ocean-200">www.nclsail.com</span>
               </div>
             </div>
           </div>
