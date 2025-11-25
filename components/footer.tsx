@@ -10,7 +10,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center mb-4">
               <Image
-                src="/images/caribbean-cruises-logo.png"
+                src="/images/norwegian-cruises-logo.png"
                 alt="Norwegian Cruise Line Logo"
                 width={40}
                 height={40}
