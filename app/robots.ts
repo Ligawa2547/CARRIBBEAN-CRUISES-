@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/login", "/admin/", "/dashboard/"],
     },
-    sitemap: "https://caribbeancruises.site/sitemap.xml",
+    sitemap: "https://www.nclsail.com/sitemap.xml",
   }
 }
