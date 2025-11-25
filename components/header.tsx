@@ -25,7 +25,7 @@ export default function Header() {
         <Link href="/" className="flex items-center space-x-2">
           <div className="relative h-8 w-8 md:h-10 md:w-10">
             <Image
-              src="/images/caribbean-cruises-logo.png"
+              src="/images/norwegian-cruises-logo.png"
               alt="Norwegian Cruise Line Logo"
               fill
               className="object-contain"
@@ -129,7 +129,7 @@ export default function Header() {
               <Link href="/" className="flex items-center gap-2 text-lg font-bold" onClick={() => setIsOpen(false)}>
                 <div className="relative h-8 w-8">
                   <Image
-                    src="/images/caribbean-cruises-logo.png"
+                    src="/images/norwegian-cruises-logo.png"
                     alt="Norwegian Cruise Line Logo"
                     fill
                     className="object-contain"
