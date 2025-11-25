@@ -12,7 +12,7 @@ export function HomeIcons() {
         <div>
           <h3 className="text-lg font-semibold mb-2">Travel the World</h3>
           <p className="text-muted-foreground">
-            Visit breathtaking destinations across the Caribbean and beyond while earning a competitive salary.
+            Explore stunning Caribbean ports and global destinations while building a rewarding career with Norwegian Cruise Line.
           </p>
         </div>
       </div>
@@ -24,7 +24,7 @@ export function HomeIcons() {
         <div>
           <h3 className="text-lg font-semibold mb-2">Diverse Community</h3>
           <p className="text-muted-foreground">
-            Join a multicultural team and build connections with colleagues from around the world.
+            Join a diverse, multicultural team and build meaningful connections with colleagues from around the world aboard Norwegian Cruise Line..
           </p>
         </div>
       </div>
@@ -36,7 +36,7 @@ export function HomeIcons() {
         <div>
           <h3 className="text-lg font-semibold mb-2">All-Inclusive Lifestyle</h3>
           <p className="text-muted-foreground">
-            Enjoy complimentary accommodations, meals, and access to ship amenities during your contract.
+            Benefit from free housing, meals, and access to designated ship facilities during your time onboard.
           </p>
         </div>
       </div>
