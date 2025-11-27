@@ -5,7 +5,6 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import ClientLayout from "@/components/client-layout"
 import { VercelAnalytics } from "@/components/vercel-analytics"
-import ZohoChat from "@/components/zoho-chat"
 import { Suspense } from "react"
 
 // Optimize font loading
@@ -64,7 +63,7 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   manifest: "/site.webmanifest",
-    generator: 'v0.dev'
+  generator: "v0.dev",
 }
 
 export default function RootLayout({
@@ -84,7 +83,7 @@ export default function RootLayout({
           </Suspense>
         </ThemeProvider>
         <VercelAnalytics />
-        <ZohoChat />
+        {/* Removed ZohoChat component */}
       </body>
     </html>
   )
