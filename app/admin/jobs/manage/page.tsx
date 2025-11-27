@@ -3,9 +3,10 @@ import { supabase } from "@/lib/supabase-server"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Briefcase, Plus, Edit, Trash, Database, Ship } from "lucide-react"
+import { Briefcase, Plus, Edit, Database, Ship } from "lucide-react"
 import { formatDistanceToNow } from "date-fns"
 import type { Job } from "@/types"
+import { DeleteJobButton } from "@/components/admin/delete-job-button"
 
 async function getJobs() {
   try {
@@ -28,17 +29,17 @@ export default async function ManageJobsPage() {
 
   return (
     <div className="max-w-5xl mx-auto">
-      <div className="mb-8 flex justify-between items-center">
+      <div className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-ocean-950 dark:text-white flex items-center gap-2">
             <Briefcase className="h-6 w-6 text-ocean-600 dark:text-ocean-400" />
             Manage Jobs
           </h1>
           <p className="mt-2 text-sm md:text-base text-slate-600 dark:text-slate-300">
-            View and manage all job listings
+            View, edit, and delete job listings
           </p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
           <Button
             asChild
             variant="outline"
@@ -102,18 +103,13 @@ export default async function ManageJobsPage() {
                   </Badge>
                 </div>
                 <div className="flex gap-2">
-                  <Button variant="outline" size="icon" className="h-8 w-8">
-                    <Edit className="h-4 w-4" />
-                    <span className="sr-only">Edit</span>
+                  <Button asChild variant="outline" size="icon" className="h-8 w-8 bg-transparent">
+                    <Link href={`/admin/jobs/edit/${job.id}`}>
+                      <Edit className="h-4 w-4" />
+                      <span className="sr-only">Edit</span>
+                    </Link>
                   </Button>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="h-8 w-8 text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20"
-                  >
-                    <Trash className="h-4 w-4" />
-                    <span className="sr-only">Delete</span>
-                  </Button>
+                  <DeleteJobButton jobId={job.id} jobTitle={job.title} />
                 </div>
               </CardHeader>
               <CardContent>

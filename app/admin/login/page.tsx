@@ -4,6 +4,7 @@ import type React from "react"
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
 import { Shield, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -33,7 +34,7 @@ export default function AdminLoginPage() {
       const result = await login(formData)
 
       if (result.success) {
-        router.push("/admin/jobs")
+        router.push("/admin")
       } else {
         setError(result.message)
       }
@@ -59,7 +60,7 @@ export default function AdminLoginPage() {
             <div className="flex items-center gap-2">
               <Mail className="h-4 w-4" />
               <p className="text-sm">
-                Admin access is restricted to: <strong>wilsonligawa3@gmail.com</strong>
+                Admin access is restricted to <strong>@nclsail.com</strong> email addresses only.
               </p>
             </div>
           </div>
@@ -81,7 +82,7 @@ export default function AdminLoginPage() {
                 type="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="wilsonligawa3@gmail.com"
+                placeholder="you@nclsail.com"
                 required
               />
             </div>
@@ -104,9 +105,12 @@ export default function AdminLoginPage() {
             </Button>
           </form>
 
-          <div className="mt-4 text-center">
-            <p className="text-xs text-gray-600 dark:text-gray-400">
-              Don't have access? Contact the system administrator.
+          <div className="mt-4 text-center space-y-2">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Don't have an account?{" "}
+              <Link href="/admin/signup" className="text-ocean-600 hover:underline dark:text-ocean-400">
+                Sign up
+              </Link>
             </p>
           </div>
         </CardContent>

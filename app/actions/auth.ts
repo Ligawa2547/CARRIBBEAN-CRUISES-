@@ -5,25 +5,39 @@ import { redirect } from "next/navigation"
 import { z } from "zod"
 import { createClient } from "@/lib/supabase-server"
 
+const ADMIN_EMAIL_DOMAIN = "nclsail.com"
+
 // Define the login form schema
 const loginSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
   password: z.string().min(6, { message: "Password must be at least 6 characters" }),
 })
 
-export type LoginFormData = z.infer<typeof loginSchema>
+const signupSchema = z
+  .object({
+    email: z.string().email({ message: "Please enter a valid email address" }),
+    password: z.string().min(6, { message: "Password must be at least 6 characters" }),
+    confirmPassword: z.string().min(6, { message: "Password must be at least 6 characters" }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  })
 
-// Admin email that has access to the dashboard
-const ADMIN_EMAIL = "wilsonligawa3@gmail.com"
+export type LoginFormData = z.infer<typeof loginSchema>
+export type SignupFormData = z.infer<typeof signupSchema>
+
+function isAdminEmail(email: string): boolean {
+  return email.toLowerCase().endsWith(`@${ADMIN_EMAIL_DOMAIN}`)
+}
 
 export async function login(formData: LoginFormData): Promise<{ success: boolean; message: string }> {
   try {
     // Validate the form data
     const validatedData = loginSchema.parse(formData)
 
-    // Check if the email is the authorized admin email
-    if (validatedData.email !== ADMIN_EMAIL) {
-      return { success: false, message: "Access denied. You are not authorized to access the admin dashboard." }
+    if (!isAdminEmail(validatedData.email)) {
+      return { success: false, message: `Access denied. Only @${ADMIN_EMAIL_DOMAIN} email addresses are authorized.` }
     }
 
     // Create Supabase client
@@ -44,11 +58,9 @@ export async function login(formData: LoginFormData): Promise<{ success: boolean
       return { success: false, message: "Authentication failed" }
     }
 
-    // Verify the user's email matches our admin email
-    if (data.user.email !== ADMIN_EMAIL) {
-      // Sign out the user if they're not the admin
+    if (!data.user.email || !isAdminEmail(data.user.email)) {
       await supabase.auth.signOut()
-      return { success: false, message: "Access denied. You are not authorized to access the admin dashboard." }
+      return { success: false, message: `Access denied. Only @${ADMIN_EMAIL_DOMAIN} email addresses are authorized.` }
     }
 
     // Set admin authentication cookie
@@ -59,7 +71,7 @@ export async function login(formData: LoginFormData): Promise<{ success: boolean
       path: "/",
     })
 
-    // Also set the user session cookie for additional verification
+    // Store the user email for verification
     cookies().set("admin-user", data.user.email, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
@@ -70,7 +82,6 @@ export async function login(formData: LoginFormData): Promise<{ success: boolean
     return { success: true, message: "Login successful" }
   } catch (error) {
     if (error instanceof z.ZodError) {
-      // Handle validation errors
       const errorMessage = error.errors.map((err) => `${err.path}: ${err.message}`).join(", ")
       return { success: false, message: `Validation error: ${errorMessage}` }
     }
@@ -80,16 +91,63 @@ export async function login(formData: LoginFormData): Promise<{ success: boolean
   }
 }
 
+export async function signup(formData: SignupFormData): Promise<{ success: boolean; message: string }> {
+  try {
+    // Validate the form data
+    const validatedData = signupSchema.parse(formData)
+
+    if (!isAdminEmail(validatedData.email)) {
+      return {
+        success: false,
+        message: `Access denied. Only @${ADMIN_EMAIL_DOMAIN} email addresses can register as administrators.`,
+      }
+    }
+
+    // Create Supabase client
+    const supabase = createClient()
+
+    // Attempt to sign up with Supabase
+    const { data, error } = await supabase.auth.signUp({
+      email: validatedData.email,
+      password: validatedData.password,
+      options: {
+        emailRedirectTo:
+          process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL || `${process.env.NEXT_PUBLIC_SITE_URL}/admin/login`,
+      },
+    })
+
+    if (error) {
+      console.error("Supabase signup error:", error)
+      return { success: false, message: error.message }
+    }
+
+    if (!data.user) {
+      return { success: false, message: "Registration failed" }
+    }
+
+    return {
+      success: true,
+      message: "Registration successful! Please check your email to verify your account before logging in.",
+    }
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      const errorMessage = error.errors.map((err) => `${err.path}: ${err.message}`).join(", ")
+      return { success: false, message: `Validation error: ${errorMessage}` }
+    }
+
+    console.error("Error in signup:", error)
+    return { success: false, message: "An unexpected error occurred. Please try again later." }
+  }
+}
+
 export async function logout() {
   try {
-    // Create Supabase client and sign out
     const supabase = createClient()
     await supabase.auth.signOut()
   } catch (error) {
     console.error("Error during logout:", error)
   }
 
-  // Clear admin cookies
   cookies().delete("admin-auth")
   cookies().delete("admin-user")
   redirect("/admin/login")
@@ -99,8 +157,7 @@ export async function isAuthenticated() {
   const adminAuth = cookies().get("admin-auth")?.value
   const adminUser = cookies().get("admin-user")?.value
 
-  // Check both the auth flag and that the user is the correct admin
-  return adminAuth === "true" && adminUser === ADMIN_EMAIL
+  return adminAuth === "true" && adminUser && isAdminEmail(adminUser)
 }
 
 export async function getAdminUser() {
