@@ -5,7 +5,7 @@ import { redirect } from "next/navigation"
 import { z } from "zod"
 import { createClient } from "@/lib/supabase-server"
 
-const ADMIN_EMAIL_DOMAIN = "nclsail.com"
+// const ADMIN_EMAIL_DOMAIN = "nclsail.com"
 
 // Define the login form schema
 const loginSchema = z.object({
@@ -15,6 +15,8 @@ const loginSchema = z.object({
 
 const signupSchema = z
   .object({
+    firstName: z.string().min(1, { message: "First name is required" }),
+    lastName: z.string().min(1, { message: "Last name is required" }),
     email: z.string().email({ message: "Please enter a valid email address" }),
     password: z.string().min(6, { message: "Password must be at least 6 characters" }),
     confirmPassword: z.string().min(6, { message: "Password must be at least 6 characters" }),
@@ -27,18 +29,18 @@ const signupSchema = z
 export type LoginFormData = z.infer<typeof loginSchema>
 export type SignupFormData = z.infer<typeof signupSchema>
 
-function isAdminEmail(email: string): boolean {
-  return email.toLowerCase().endsWith(`@${ADMIN_EMAIL_DOMAIN}`)
-}
+// function isAdminEmail(email: string): boolean {
+//   return email.toLowerCase().endsWith(`@${ADMIN_EMAIL_DOMAIN}`)
+// }
 
 export async function login(formData: LoginFormData): Promise<{ success: boolean; message: string }> {
   try {
     // Validate the form data
     const validatedData = loginSchema.parse(formData)
 
-    if (!isAdminEmail(validatedData.email)) {
-      return { success: false, message: `Access denied. Only @${ADMIN_EMAIL_DOMAIN} email addresses are authorized.` }
-    }
+    // if (!isAdminEmail(validatedData.email)) {
+    //   return { success: false, message: `Access denied. Only @${ADMIN_EMAIL_DOMAIN} email addresses are authorized.` }
+    // }
 
     // Create Supabase client
     const supabase = createClient()
@@ -58,13 +60,14 @@ export async function login(formData: LoginFormData): Promise<{ success: boolean
       return { success: false, message: "Authentication failed" }
     }
 
-    if (!data.user.email || !isAdminEmail(data.user.email)) {
-      await supabase.auth.signOut()
-      return { success: false, message: `Access denied. Only @${ADMIN_EMAIL_DOMAIN} email addresses are authorized.` }
-    }
+    // if (!data.user.email || !isAdminEmail(data.user.email)) {
+    //   await supabase.auth.signOut()
+    //   return { success: false, message: `Access denied. Only @${ADMIN_EMAIL_DOMAIN} email addresses are authorized.` }
+    // }
 
     // Set admin authentication cookie
-    cookies().set("admin-auth", "true", {
+    const cookieStore = await cookies()
+    cookieStore.set("admin-auth", "true", {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       maxAge: 60 * 60 * 24, // 1 day
@@ -72,7 +75,7 @@ export async function login(formData: LoginFormData): Promise<{ success: boolean
     })
 
     // Store the user email for verification
-    cookies().set("admin-user", data.user.email, {
+    cookieStore.set("admin-user", data.user.email || "", {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       maxAge: 60 * 60 * 24, // 1 day
@@ -96,23 +99,19 @@ export async function signup(formData: SignupFormData): Promise<{ success: boole
     // Validate the form data
     const validatedData = signupSchema.parse(formData)
 
-    if (!isAdminEmail(validatedData.email)) {
-      return {
-        success: false,
-        message: `Access denied. Only @${ADMIN_EMAIL_DOMAIN} email addresses can register as administrators.`,
-      }
-    }
-
     // Create Supabase client
     const supabase = createClient()
 
-    // Attempt to sign up with Supabase
     const { data, error } = await supabase.auth.signUp({
       email: validatedData.email,
       password: validatedData.password,
       options: {
         emailRedirectTo:
           process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL || `${process.env.NEXT_PUBLIC_SITE_URL}/admin/login`,
+        data: {
+          first_name: validatedData.firstName,
+          last_name: validatedData.lastName,
+        },
       },
     })
 
@@ -148,19 +147,22 @@ export async function logout() {
     console.error("Error during logout:", error)
   }
 
-  cookies().delete("admin-auth")
-  cookies().delete("admin-user")
+  const cookieStore = await cookies()
+  cookieStore.delete("admin-auth")
+  cookieStore.delete("admin-user")
   redirect("/admin/login")
 }
 
 export async function isAuthenticated() {
-  const adminAuth = cookies().get("admin-auth")?.value
-  const adminUser = cookies().get("admin-user")?.value
+  const cookieStore = await cookies()
+  const adminAuth = cookieStore.get("admin-auth")?.value
+  const adminUser = cookieStore.get("admin-user")?.value
 
-  return adminAuth === "true" && adminUser && isAdminEmail(adminUser)
+  return adminAuth === "true" && !!adminUser
 }
 
 export async function getAdminUser() {
-  const adminUser = cookies().get("admin-user")?.value
+  const cookieStore = await cookies()
+  const adminUser = cookieStore.get("admin-user")?.value
   return adminUser || null
 }

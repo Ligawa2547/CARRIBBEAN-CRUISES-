@@ -1,14 +1,24 @@
 import type React from "react"
 import { redirect } from "next/navigation"
+import { headers } from "next/headers"
 import Link from "next/link"
 import { Shield, LogOut, Plus, List, Users, Home, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { isAuthenticated, logout, getAdminUser } from "../actions/auth"
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+  const headersList = headers()
+  const pathname = headersList.get("x-pathname") || ""
+
+  const isAuthPage = pathname.includes("/admin/login") || pathname.includes("/admin/signup")
+
+  if (isAuthPage) {
+    return <>{children}</>
+  }
+
   // Check if user is authenticated (for server components)
   const authenticated = await isAuthenticated()
-  if (!authenticated && typeof window === "undefined") {
+  if (!authenticated) {
     redirect("/admin/login")
   }
 
