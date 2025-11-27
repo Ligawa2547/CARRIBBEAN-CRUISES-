@@ -1,4 +1,4 @@
-import { createClient } from "@supabase/supabase-js"
+import { createClient as createSupabaseClient } from "@supabase/supabase-js"
 import { cookies } from "next/headers"
 import type { Database } from "@/types/supabase"
 
@@ -6,7 +6,7 @@ import type { Database } from "@/types/supabase"
 export function createServerClient() {
   // Only create the cookie store when this function is called
   // This ensures cookies() is only called in a request context
-  return createClient<Database>(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
+  return createSupabaseClient<Database>(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
     cookies: {
       get(name: string) {
         // Only access cookies when the function is called
@@ -22,9 +22,11 @@ export function createServerClient() {
   })
 }
 
+export const createClient = createServerClient
+
 // For server actions and API routes that need direct access
 // Don't initialize with cookies at build time
-export const supabase = createClient<Database>(
+export const supabase = createSupabaseClient<Database>(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!,
 )
