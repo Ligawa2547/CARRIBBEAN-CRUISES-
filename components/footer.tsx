@@ -10,7 +10,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center mb-4">
               <Image
-                src="https://osnxmqyq79rzmwe6.public.blob.vercel-storage.com/logo%20vnk.png"
+                src="/images/norwegian-cruises-logo.png"
                 alt="Norwegian Cruise Line Logo"
                 width={40}
                 height={40}

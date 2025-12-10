@@ -25,7 +25,7 @@ export default function Header() {
         <Link href="/" className="flex items-center space-x-2">
           <div className="relative h-8 w-8 md:h-10 md:w-10">
             <Image
-              src="https://osnxmqyq79rzmwe6.public.blob.vercel-storage.com/logo%20vnk.png"
+              src="/images/norwegian-cruises-logo.png"
               alt="Norwegian Cruise Line Logo"
               fill
               className="object-contain"
