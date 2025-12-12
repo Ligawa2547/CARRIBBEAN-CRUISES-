@@ -178,7 +178,7 @@ export default function ContactPage() {
                   <Phone className="mr-3 h-5 w-5 text-indigo-600 dark:text-indigo-400" />
                   <div>
                     <h3 className="font-medium text-indigo-950 dark:text-white">Phone</h3>
-                    <p className="text-xs md:text-sm text-slate-600 dark:text-slate-300">+1 (216) 111-222</p>
+                    <p className="text-xs md:text-sm text-slate-600 dark:text-slate-300">+1 (289) 546-8195</p>
                   </div>
                 </div>
                 <div className="flex items-start">
