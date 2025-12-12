@@ -15,7 +15,7 @@ export default function DisclaimerPage() {
       <div className="prose prose-ocean max-w-none">
         <h2>1. General Information</h2>
         <p>
-          The information provided on www.caribbeancruises.site ("our website") is for general informational purposes
+          The information provided on www.nclsail.com ("our website") is for general informational purposes
           only. All information on our website is provided in good faith; however, we make no representation or warranty
           of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability, or
           completeness of any information on our website.
@@ -23,7 +23,7 @@ export default function DisclaimerPage() {
 
         <h2>2. Recruitment Services</h2>
         <p>
-          Caribbean Cruises acts as a recruitment partner for various cruise lines. We facilitate the application
+          Norwegian Cruise Line acts as a recruitment partner for various cruise lines. We facilitate the application
           process by connecting candidates with potential employers in the cruise industry. However:
         </p>
         <ul>
@@ -126,17 +126,17 @@ export default function DisclaimerPage() {
         <h2>11. Contact Us</h2>
         <p>If you have any questions about this Disclaimer, please contact us at:</p>
         <p>
-          Caribbean Cruises
+          Norwegian Cruise Line
           <br />
-          Port Everglades Terminal
+          7665 Corporate Center Drive
           <br />
-          Fort Lauderdale, FL 33316
+         Miami, Florida 33126
           <br />
           United States
           <br />
-          <a href="mailto:legal@caribbeancruises.site">legal@caribbeancruises.site</a>
+          <a href="mailto:legal@nclsail.com/">legal@nclsail.com/</a>
           <br />
-          Phone: +1 (216) 777-7288
+          Phone: +1 (289) 546-8195
         </p>
       </div>
     </div>
