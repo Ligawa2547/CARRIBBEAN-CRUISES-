@@ -14,8 +14,8 @@ export default function CookiesPolicyPage() {
 
       <div className="prose prose-ocean max-w-none">
         <p>
-          This Cookies Policy explains how Caribbean Cruises ("we," "our," or "us") uses cookies and similar
-          technologies on our website www.caribbeancruises.site. This policy should be read alongside our{" "}
+          This Cookies Policy explains how Norwegian Cruise Line ("we," "our," or "us") uses cookies and similar
+          technologies on our website www.nclsail.com This policy should be read alongside our{" "}
           <Link href="/privacy-policy">Privacy Policy</Link>, which explains how we use personal information.
         </p>
 
@@ -268,17 +268,17 @@ export default function CookiesPolicyPage() {
           If you have any questions or concerns about our use of cookies or this Cookies Policy, please contact us at:
         </p>
         <p>
-          Caribbean Cruises
+          Norwegian Cruise Line
           <br />
-          Port Everglades Terminal
+          7665 Corporate Center Drive
           <br />
-          Fort Lauderdale, FL 33316
+          Miami, Florida 33126
           <br />
           United States
           <br />
-          <a href="mailto:privacy@caribbeancruises.site">privacy@caribbeancruises.site</a>
+          <a href="mailto:privacy@nclsail.com">privacy@nclsail.com</a>
           <br />
-          Phone: +1 (216) 777-7288
+          Phone: +1 (289) 546-8195
         </p>
       </div>
     </div>
