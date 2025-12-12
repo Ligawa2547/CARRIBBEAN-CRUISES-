@@ -14,9 +14,9 @@ export default function PrivacyPolicyPage() {
 
       <div className="prose prose-ocean max-w-none">
         <p>
-          Caribbean Cruises ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains
+          Norwegian Cruise Line ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains
           how we collect, use, disclose, and safeguard your information when you visit our website
-          www.caribbeancruises.site or use our services.
+          https://www.nclsail.com/ or use our services.
         </p>
 
         <h2>1. Information We Collect</h2>
@@ -145,7 +145,7 @@ export default function PrivacyPolicyPage() {
         </ul>
         <p>
           To exercise these rights, please contact us at{" "}
-          <a href="mailto:privacy@caribbeancruises.site">privacy@caribbeancruises.site</a>.
+          <a href="mailto:privacy@nclsail.com">privacy@nclsail.com/</a>.
         </p>
 
         <h2>8. International Data Transfers</h2>
@@ -191,9 +191,9 @@ export default function PrivacyPolicyPage() {
           <br />
           United States
           <br />
-          <a href="mailto:privacy@caribbeancruises.site">privacy@caribbeancruises.site</a>
+          <a href="mailto:privacy@nclsail.com">privacy@nclsail.com</a>
           <br />
-          Phone: +1 (216) 777-7288
+          Phone: +1 (289) 546-8195
         </p>
       </div>
     </div>
