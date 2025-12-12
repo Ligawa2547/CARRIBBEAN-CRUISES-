@@ -90,7 +90,7 @@ export default function DisclaimerPage() {
 
         <h2>7. Limitation of Liability</h2>
         <p>
-          Under no circumstances shall Caribbean Cruises be liable for any direct, indirect, special, incidental,
+          Under no circumstances shall Norwegian Cruise Line be liable for any direct, indirect, special, incidental,
           consequential, or punitive damages, including but not limited to, loss of profits, data, use, goodwill, or
           other intangible losses, resulting from:
         </p>
@@ -103,7 +103,7 @@ export default function DisclaimerPage() {
 
         <h2>8. Indemnification</h2>
         <p>
-          You agree to defend, indemnify, and hold harmless Caribbean Cruises, its affiliates, licensors, and service
+          You agree to defend, indemnify, and hold harmless Norwegian Cruise Line, its affiliates, licensors, and service
           providers, and its and their respective officers, directors, employees, contractors, agents, licensors,
           suppliers, successors, and assigns from and against any claims, liabilities, damages, judgments, awards,
           losses, costs, expenses, or fees (including reasonable attorneys' fees) arising out of or relating to your
