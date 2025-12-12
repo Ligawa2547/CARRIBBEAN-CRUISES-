@@ -15,18 +15,18 @@ export default function TermsOfServicePage() {
       <div className="prose prose-ocean max-w-none">
         <p>
           Please read these Terms of Service ("Terms") carefully before using the website and services offered by
-          Caribbean Cruises ("we," "our," or "us").
+          Norwegian Cruise Line ("we," "our," or "us").
         </p>
 
         <h2>1. Acceptance of Terms</h2>
         <p>
-          By accessing or using our website at www.caribbeancruises.site and our services, you agree to be bound by
+          By accessing or using our website at www.nclsail.com and our services, you agree to be bound by
           these Terms and our Privacy Policy. If you do not agree to these Terms, please do not use our services.
         </p>
 
         <h2>2. Services Description</h2>
         <p>
-          Caribbean Cruises provides recruitment services for the cruise industry and offers cruise ticket sales as an
+          Norwegian Cruise Line provides recruitment services for the cruise industry and offers cruise ticket sales as an
           authorized provider for various cruise lines. Our services include:
         </p>
         <ul>
@@ -83,7 +83,7 @@ export default function TermsOfServicePage() {
         <h3>5.1 Booking Process</h3>
         <p>
           When you book a cruise through our services, you enter into a contract with the cruise line, not with
-          Caribbean Cruises. We act as an authorized agent for the cruise lines. All bookings are subject to the cruise
+          Norwegian Cruise Line. We act as an authorized agent for the cruise lines. All bookings are subject to the cruise
           line's terms and conditions, which will be provided to you during the booking process.
         </p>
 
@@ -122,7 +122,7 @@ export default function TermsOfServicePage() {
         <h3>7.1 Our Intellectual Property</h3>
         <p>
           All content on our website, including text, graphics, logos, images, audio clips, digital downloads, data
-          compilations, and software, is the property of Caribbean Cruises or our content suppliers and is protected by
+          compilations, and software, is the property of Norwegian Cruise Line or our content suppliers and is protected by
           international copyright laws. The compilation of all content on our website is our exclusive property and is
           protected by international copyright laws.
         </p>
@@ -154,7 +154,7 @@ export default function TermsOfServicePage() {
 
         <h2>9. Limitation of Liability</h2>
         <p>
-          TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL CARIBBEAN CRUISES, ITS AFFILIATES,
+          TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL Norwegian Cruise Line, ITS AFFILIATES,
           OFFICERS, DIRECTORS, EMPLOYEES, AGENTS, OR CRUISE LINE PARTNERS BE LIABLE FOR ANY INDIRECT, PUNITIVE,
           INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR EXEMPLARY DAMAGES, INCLUDING WITHOUT LIMITATION DAMAGES FOR LOSS OF
           PROFITS, GOODWILL, USE, DATA, OR OTHER INTANGIBLE LOSSES, ARISING OUT OF OR RELATING TO YOUR USE OF, OR
@@ -168,7 +168,7 @@ export default function TermsOfServicePage() {
 
         <h2>10. Indemnification</h2>
         <p>
-          You agree to indemnify, defend, and hold harmless Caribbean Cruises, its affiliates, officers, directors,
+          You agree to indemnify, defend, and hold harmless Norwegian Cruise Line, its affiliates, officers, directors,
           employees, agents, and cruise line partners from and against any and all claims, liabilities, damages, losses,
           costs, expenses, or fees (including reasonable attorneys' fees) that arise from or relate to:
         </p>
@@ -209,21 +209,21 @@ export default function TermsOfServicePage() {
         <h2>14. Entire Agreement</h2>
         <p>
           These Terms, together with our Privacy Policy and any other legal notices published by us on our website,
-          constitute the entire agreement between you and Caribbean Cruises concerning our services.
+          constitute the entire agreement between you and Norwegian Cruise Line concerning our services.
         </p>
 
         <h2>15. Contact Information</h2>
         <p>If you have any questions about these Terms, please contact us at:</p>
         <p>
-          Caribbean Cruises
+          Norwegian Cruise Line
           <br />
-          Port Everglades Terminal
+          7665 Corporate Center Drive
           <br />
-          Fort Lauderdale, FL 33316
+          Miami, Florida 33126
           <br />
           United States
           <br />
-          <a href="mailto:legal@caribbeancruises.site">legal@caribbeancruises.site</a>
+          <a href="mailto:legal@nclsail.com">legal@nclsail.com</a>
           <br />
           Phone: +1 (216) 777-7288
         </p>
