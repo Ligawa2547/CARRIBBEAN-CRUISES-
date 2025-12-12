@@ -183,11 +183,11 @@ export default function PrivacyPolicyPage() {
           at:
         </p>
         <p>
-          Caribbean Cruises
+          Norwegian Cruise Line
           <br />
-          Port Everglades Terminal
+          7665 Corporate Center Drive
           <br />
-          Fort Lauderdale, FL 33316
+          Miami, Florida 33126
           <br />
           United States
           <br />
