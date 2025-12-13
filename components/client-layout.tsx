@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import type React from "react"
 import { AuthProvider } from "@/context/auth-context"
+import Toaster from "@/components/toaster"
 import dynamic from "next/dynamic"
 
 // Dynamically import components to reduce initial bundle size
@@ -25,6 +26,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   return (
     <AuthProvider>
       <div className="flex min-h-screen flex-col">
+        <Toaster />
         {mounted ? (
           <Header />
         ) : (

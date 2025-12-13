@@ -27,14 +27,16 @@ export default function LoginPage() {
   // Check for messages or errors in URL params
   useEffect(() => {
     const message = searchParams.get("message")
+    const emailParam = searchParams.get("email")
     const error = searchParams.get("error")
     const returnUrl = searchParams.get("returnUrl")
 
     if (message) {
-      setSuccessMessage(message)
+      const fullMessage = emailParam ? `${message} (sent to ${emailParam})` : message
+      setSuccessMessage(fullMessage)
       toast({
         title: "Success",
-        description: message,
+        description: fullMessage,
       })
     }
 

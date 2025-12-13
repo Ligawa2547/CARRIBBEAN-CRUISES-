@@ -23,6 +23,8 @@ export default function SignupPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [debugInfo, setDebugInfo] = useState<string | null>(null)
   const [showFallback, setShowFallback] = useState(false)
+  const [successMessage, setSuccessMessage] = useState<string | null>(null)
+  const [confirmationEmail, setConfirmationEmail] = useState<string | null>(null)
   const { signUp } = useAuth()
   const router = useRouter()
   const { toast } = useToast()
@@ -72,20 +74,32 @@ export default function SignupPage() {
           return
         }
 
-        // Handle custom messages from context signup
+        // Handle context signup: prefer returned message, but handle generic success cases too
         if (message) {
+          // Show success/notice inline and redirect to login with message for the login page
+          if (success) {
+            router.push(
+              `/login?message=${encodeURIComponent(
+                message,
+              )}&email=${encodeURIComponent(email)}`,
+            )
+            return
+          }
+
           toast({
             title: success ? "Signup successful" : "Signup notice",
             description: message,
             variant: success ? "default" : "destructive",
           })
 
-          if (success) {
-            router.push("/login")
-            return
-          }
-
+          setSuccessMessage(message)
+          setConfirmationEmail(email)
           setIsLoading(false)
+          return
+        }
+        if (success && !message) {
+          const fallbackMessage = "Signup successful. Please check your email to verify your account before logging in."
+          router.push(`/login?message=${encodeURIComponent(fallbackMessage)}&email=${encodeURIComponent(email)}`)
           return
         }
       } else {
@@ -96,11 +110,15 @@ export default function SignupPage() {
         const userData = directResult.data?.user
 
         if (!userData) {
+          const message = "Verification email sent. Please check your email to verify your account before logging in."
           toast({
             title: "Verification email sent",
-            description: "Please check your email to verify your account before logging in.",
+            description: message,
           })
-          router.push("/login")
+          // Do not redirect immediately — show the message inline and provide a go-to-login action.
+          setSuccessMessage(message)
+          setConfirmationEmail(email)
+          setIsLoading(false)
           return
         }
 
@@ -120,7 +138,7 @@ export default function SignupPage() {
             description:
               "Your account was created, but we couldn't update your profile. You can update it later in settings.",
           })
-        } else {
+          } else {
           console.log("Profile updated successfully")
           toast({
             title: "Signup successful",
@@ -128,9 +146,12 @@ export default function SignupPage() {
           })
         }
 
-        // Redirect to returnUrl if it exists, otherwise to login
+        // Redirect to returnUrl if it exists, otherwise to login with success message
         console.log("Redirecting to:", returnUrl || "/login")
-        router.push(returnUrl || "/login")
+        const successMsg = "Signup successful. You can sign in to your account."
+        router.push(
+          returnUrl || `/login?message=${encodeURIComponent(successMsg)}&email=${encodeURIComponent(email)}`,
+        )
         return
       }
     } catch (error: any) {
@@ -141,6 +162,29 @@ export default function SignupPage() {
         description: "An unexpected error occurred. Please try again later.",
         variant: "destructive",
       })
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const resendVerification = async () => {
+    if (!confirmationEmail) return
+    setIsLoading(true)
+    try {
+      const res = await fetch("/api/resend-verification", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: confirmationEmail }),
+      })
+
+      const result = await res.json()
+      if (!res.ok || !result.success) {
+        toast({ title: "Resend failed", description: result?.message || "Unable to resend verification", variant: "destructive" })
+      } else {
+        toast({ title: "Verification resent", description: `Verification email resent to ${confirmationEmail}` })
+      }
+    } catch (error) {
+      toast({ title: "Resend failed", description: "Unexpected error while resending verification", variant: "destructive" })
     } finally {
       setIsLoading(false)
     }
@@ -169,6 +213,22 @@ export default function SignupPage() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
+            {successMessage && (
+              <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-md text-sm text-green-800 dark:bg-green-900/20 dark:border-green-800 dark:text-green-300 flex items-start">
+                <div className="flex-1">
+                  <p className="font-medium">{successMessage}</p>
+                  {confirmationEmail && <p className="text-xs">We sent this to: {confirmationEmail}</p>}
+                </div>
+                <div className="flex flex-col gap-2 ml-3">
+                  <Button variant="outline" size="sm" onClick={() => router.push(`/login?message=${encodeURIComponent(successMessage)}&email=${encodeURIComponent(confirmationEmail || "")}`)}>
+                    Go to Login
+                  </Button>
+                  <Button variant="ghost" size="sm" onClick={resendVerification} disabled={isLoading}>
+                    Resend verification
+                  </Button>
+                </div>
+              </div>
+            )}
             <div className="space-y-2">
               <Label htmlFor="fullName">Full Name</Label>
               <div className="relative">
