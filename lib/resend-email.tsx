@@ -39,18 +39,18 @@ export async function sendApplicationConfirmationEmail({ to, name, jobTitle }: E
       <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Application Confirmation - Caribbean Cruises</title>
+        <title>Application Confirmation - Norwegian Cruise Line</title>
       </head>
       <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
         <div style="background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%); padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
-          <h1 style="color: white; margin: 0; font-size: 28px;">Caribbean Cruises</h1>
+          <h1 style="color: white; margin: 0; font-size: 28px;">Norwegian Cruise Line</h1>
           <p style="color: white; margin: 10px 0 0 0; font-size: 16px;">Talent Acquisition Team</p>
         </div>
         
         <div style="background: white; padding: 30px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 10px 10px;">
           <h2 style="color: #0ea5e9; margin-top: 0;">Dear ${name},</h2>
           
-          <p>Thank you for your interest in joining Caribbean Cruises. We truly appreciate the time you took to apply for <strong>${jobTitle}</strong>.</p>
+          <p>Thank you for your interest in joining Norwegian Cruise Line. We truly appreciate the time you took to apply for <strong>${jobTitle}</strong>.</p>
           
           <p>Due to the many applications received, we're unable to conduct one-on-one virtual interviews with every applicant. However, we want to ensure everyone gets a fair opportunity to be heard.</p>
           
@@ -65,7 +65,7 @@ export async function sendApplicationConfirmationEmail({ to, name, jobTitle }: E
             
             <ul style="margin: 15px 0; padding-left: 20px;">
               <li>Tell us about yourself.</li>
-              <li>Why do you want to work with Caribbean Cruises?</li>
+              <li>Why do you want to work with Norwegian Cruise Line?</li>
               <li>What experience or skills make you a strong candidate?</li>
               <li>What makes you a good fit for a customer-focused cruise team?</li>
             </ul>
@@ -88,7 +88,7 @@ export async function sendApplicationConfirmationEmail({ to, name, jobTitle }: E
           <div style="background: #fee2e2; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #ef4444;">
             <h3 style="color: #dc2626; margin-top: 0;">Important Deadline</h3>
             <p style="margin: 0;"><strong>Deadline to submit your video and documents: ${deadlineString}</strong></p>
-              <p style="margin: 10px 0 0 0;">Submit your video link to: <a href="mailto:talent@nclsail.com" style="color: #0ea5e9;">talent@nclsail.com</a></p>
+              <p style="margin: 10px 0 0 0;">Submit your video link to: <a href="mailto:applications.portal@nclsail.com" style="color: #0ea5e9;">applications.portal@nclsail.com</a></p>
           </div>
           
           <p>If you have any questions or face any issues, feel free to reach out.</p>
@@ -98,8 +98,8 @@ export async function sendApplicationConfirmationEmail({ to, name, jobTitle }: E
           <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
             <p style="margin: 0;"><strong>Warm regards,</strong></p>
             <p style="margin: 5px 0;"><strong>Talent Acquisition Team</strong></p>
-            <p style="margin: 5px 0;"><strong>Caribbean Cruises</strong></p>
-              <p style="margin: 5px 0;">Email: <a href="mailto:talent@nclsail.com" style="color: #0ea5e9;">talent@nclsail.com</a></p>
+            <p style="margin: 5px 0;"><strong>Norwegian Cruise Line</strong></p>
+              <p style="margin: 5px 0;">Email: <a href="mailto:applications.portal@nclsail.com" style="color: #0ea5e9;">applications.portal@nclsail.com</a></p>
           </div>
         </div>
       </body>
@@ -112,7 +112,7 @@ export async function sendApplicationConfirmationEmail({ to, name, jobTitle }: E
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     try {
       const { data, error } = await resend.emails.send({
-        from: "Caribbean Cruises <talent@nclsail.com>",
+        from: "Norwegian Cruise Line <applications.portal@nclsail.com>",
         to: [to],
         subject: `Application Confirmation - ${jobTitle} Position`,
         html: emailHtml,
