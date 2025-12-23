@@ -10,7 +10,7 @@ interface EmailContactModalProps {
 }
 
 export function EmailContactModal({ isOpen, onClose, subject }: EmailContactModalProps) {
-  const emailAddress = "info@caribbeancruises.site"
+  const emailAddress = "info@nclsail.com"
   const encodedSubject = encodeURIComponent(subject)
   const mailtoLink = `mailto:${emailAddress}?subject=${encodedSubject}`
 
