@@ -3,6 +3,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { formatDistanceToNow } from "date-fns"
 
+// Load client-only Resend button dynamically to avoid server/component mismatch
+import dynamic from "next/dynamic"
+const ResendEmailButton = dynamic(() => import("@/components/admin/resend-email-button"), { ssr: false })
+
 interface JobApplication {
   id: number
   job_id: number
@@ -132,6 +136,14 @@ export default async function AdminApplicationsPage() {
                       <div>
                         <span className="text-slate-500 dark:text-slate-400">Phone: </span>
                         <span className="text-slate-600 dark:text-slate-300">{application.phone}</span>
+                      </div>
+                    </div>
+
+                    <div className="mt-4 flex gap-2">
+                      {/* Client-side resend button */}
+                      {/* @ts-ignore Server components cannot render client components without dynamic import - using a simple client boundary */}
+                      <div className="client-resend-button">
+                        <ResendEmailButton applicationId={application.id} />
                       </div>
                     </div>
                   </div>

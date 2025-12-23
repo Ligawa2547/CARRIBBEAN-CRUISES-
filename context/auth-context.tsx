@@ -84,6 +84,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       if (error) {
         console.error("Signup error:", error)
+
+        // Provide a clearer message for unexpected server failures (often SMTP/email issues)
+        if ((error as any)?.status === 500 || (error as any)?.code === "unexpected_failure") {
+          return {
+            error: new Error(
+              "Server error creating account. This is usually caused by an email delivery problem — try the fallback signup or try again later.",
+            ),
+            success: false,
+          }
+        }
+
         return { error, success: false }
       }
 

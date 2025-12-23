@@ -83,11 +83,23 @@ export default function ApplicationForm({ job }: { job: Job }) {
       })
 
       if (result.success) {
-        toast({
-          title: "Application submitted",
-          description: "Your application has been successfully submitted.",
-        })
-        router.push(`/jobs/${job.id}/apply/success`)
+        // If email sending failed on the server, inform the applicant and offer retry info
+        if (result.emailSent === false) {
+          toast({
+            title: "Application submitted — email failed",
+            description:
+              "Your application was received, but we couldn't send the confirmation email. Please check your email address or contact support.",
+            variant: "destructive",
+          })
+          // Still navigate to the success page so user sees the confirmation UI
+          router.push(`/jobs/${job.id}/apply/success`)
+        } else {
+          toast({
+            title: "Application submitted",
+            description: "Your application has been successfully submitted.",
+          })
+          router.push(`/jobs/${job.id}/apply/success`)
+        }
       } else {
         toast({
           title: "Submission failed",
