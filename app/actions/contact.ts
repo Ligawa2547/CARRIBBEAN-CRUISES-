@@ -1,6 +1,6 @@
 "use server"
 
-import { supabase } from "@/lib/supabase-server"
+import { createClient } from "@/lib/supabase-server"
 import { z } from "zod"
 
 // Define the contact form schema
@@ -17,6 +17,8 @@ export async function submitContactForm(formData: ContactFormData): Promise<{ su
   try {
     // Validate the form data
     const validatedData = contactFormSchema.parse(formData)
+
+    const supabase = createClient()
 
     // Check if the contacts table exists, create it if it doesn't
     const { error: tableCheckError } = await supabase.from("contacts").select("id").limit(1)

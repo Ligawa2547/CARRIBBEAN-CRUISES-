@@ -1,9 +1,11 @@
 "use server"
 
-import { supabase } from "@/lib/supabase-server"
+import { createClient } from "@/lib/supabase-server"
 
 export async function saveJob(userId: string, jobId: number): Promise<{ success: boolean; error: string | null }> {
   try {
+    const supabase = createClient()
+
     // Check if job is already saved
     const { data: existingSave, error: checkError } = await supabase
       .from("saved_jobs")
@@ -44,6 +46,7 @@ export async function saveJob(userId: string, jobId: number): Promise<{ success:
 
 export async function unsaveJob(userId: string, jobId: number): Promise<{ success: boolean; error: string | null }> {
   try {
+    const supabase = createClient()
     const { error } = await supabase.from("saved_jobs").delete().eq("user_id", userId).eq("job_id", jobId)
 
     if (error) {
@@ -60,6 +63,7 @@ export async function unsaveJob(userId: string, jobId: number): Promise<{ succes
 
 export async function isJobSaved(userId: string, jobId: number): Promise<{ saved: boolean; error: string | null }> {
   try {
+    const supabase = createClient()
     const { data, error } = await supabase
       .from("saved_jobs")
       .select("id")
