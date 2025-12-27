@@ -1,8 +1,9 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { supabase } from "@/lib/supabase-server"
+import { createClient } from "@/lib/supabase-server"
 import { sendBulkApplicationEmails } from "@/lib/resend-email"
 
 export async function POST(request: NextRequest) {
+  const supabase = createClient()
   try {
     // First, get all applications with just the basic columns
     const { data: applications, error } = await supabase

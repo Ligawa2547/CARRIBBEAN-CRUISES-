@@ -8,6 +8,9 @@ interface EmailData {
   jobTitle: string
 }
 
+const TALENT_EMAIL = "Caribbean Cruises <talent@caribbeancruises.site>"
+const INFO_EMAIL = "Caribbean Cruises <info@caribbeancruises.site>"
+
 export async function sendApplicationConfirmationEmail({ to, name, jobTitle }: EmailData) {
   try {
     const deadline = new Date()
@@ -93,7 +96,7 @@ export async function sendApplicationConfirmationEmail({ to, name, jobTitle }: E
     `
 
     const { data, error } = await resend.emails.send({
-      from: "Caribbean Cruises <talent@caribbeancruises.site>",
+      from: TALENT_EMAIL, // Updated to use talent email
       to: [to],
       subject: `Application Confirmation - ${jobTitle} Position`,
       html: emailHtml,
@@ -108,6 +111,98 @@ export async function sendApplicationConfirmationEmail({ to, name, jobTitle }: E
     return { success: true, data }
   } catch (error) {
     console.error("Error in sendApplicationConfirmationEmail:", error)
+    throw error
+  }
+}
+
+export async function sendContactResponseEmail({
+  to,
+  name,
+  subject,
+  originalMessage,
+}: {
+  to: string
+  name: string
+  subject: string
+  originalMessage: string
+}) {
+  try {
+    const emailHtml = `
+      <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto;">
+        <div style="background: #1e40af; padding: 20px; color: white; border-radius: 8px 8px 0 0;">
+          <h2>Caribbean Cruises</h2>
+        </div>
+        <div style="padding: 20px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px;">
+          <p>Dear ${name},</p>
+          <p>Thank you for contacting us regarding <strong>${subject}</strong>.</p>
+          <p>This is an automated response to confirm we have received your message and our team will get back to you shortly.</p>
+          <div style="background: #f3f4f6; padding: 15px; border-radius: 6px; margin: 20px 0;">
+            <p style="margin-top: 0; font-weight: bold;">Original Message:</p>
+            <p style="font-style: italic;">"${originalMessage}"</p>
+          </div>
+          <p>Best regards,</p>
+          <p><strong>Customer Service Team</strong><br>Caribbean Cruises</p>
+        </div>
+      </div>
+    `
+
+    const { data, error } = await resend.emails.send({
+      from: INFO_EMAIL,
+      to: [to],
+      subject: `Re: ${subject}`,
+      html: emailHtml,
+    })
+
+    if (error) throw new Error(error.message)
+    return { success: true, data }
+  } catch (error) {
+    console.error("Error sending contact response:", error)
+    throw error
+  }
+}
+
+export async function sendStatusUpdateEmail({
+  to,
+  name,
+  jobTitle,
+  newStatus,
+}: {
+  to: string
+  name: string
+  jobTitle: string
+  newStatus: string
+}) {
+  try {
+    const statusText = newStatus.charAt(0).toUpperCase() + newStatus.slice(1)
+    const emailHtml = `
+      <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto;">
+        <div style="background: #1e40af; padding: 20px; color: white; border-radius: 8px 8px 0 0;">
+          <h2>Caribbean Cruises</h2>
+        </div>
+        <div style="padding: 20px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px;">
+          <p>Dear ${name},</p>
+          <p>We're writing to update you on the status of your application for <strong>${jobTitle}</strong>.</p>
+          <div style="background: #e0f2fe; padding: 20px; border-radius: 8px; text-align: center; margin: 20px 0;">
+            <p style="margin: 0; font-size: 18px;">New Status: <strong style="color: #0369a1;">${statusText}</strong></p>
+          </div>
+          <p>Our team is carefully reviewing your profile and will contact you for the next steps.</p>
+          <p>Best regards,</p>
+          <p><strong>Talent Acquisition Team</strong><br>Caribbean Cruises</p>
+        </div>
+      </div>
+    `
+
+    const { data, error } = await resend.emails.send({
+      from: TALENT_EMAIL,
+      to: [to],
+      subject: `Update on your application: ${jobTitle}`,
+      html: emailHtml,
+    })
+
+    if (error) throw new Error(error.message)
+    return { success: true, data }
+  } catch (error) {
+    console.error("Error sending status update:", error)
     throw error
   }
 }

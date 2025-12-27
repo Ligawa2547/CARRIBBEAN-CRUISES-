@@ -1,12 +1,13 @@
 "use server"
 
-import { supabase } from "@/lib/supabase-server"
+import { createClient } from "@/lib/supabase-server"
 import type { JobApplication } from "@/types"
 import { sendApplicationConfirmationEmail } from "@/lib/resend-email"
 
 export async function submitApplication(
   application: JobApplication,
 ): Promise<{ success: boolean; error: string | null }> {
+  const supabase = createClient()
   try {
     const { error } = await supabase.from("applications").insert([application])
 
