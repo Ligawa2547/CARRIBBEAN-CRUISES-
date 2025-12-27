@@ -56,11 +56,15 @@ export default function AdminLoginPage() {
         </CardHeader>
         <CardContent>
           <div className="mb-4 p-3 rounded-md bg-blue-50 text-blue-800 dark:bg-blue-900/20 dark:text-blue-300 border border-blue-200 dark:border-blue-800/30">
-            <div className="flex items-center gap-2">
-              <Mail className="h-4 w-4" />
-              <p className="text-sm">
-                Admin access is restricted to: <strong>wilsonligawa3@gmail.com</strong>
-              </p>
+            <div className="flex items-start gap-2">
+              <Mail className="h-4 w-4 mt-1 shrink-0" />
+              <div className="text-sm">
+                <p>Authorized access for:</p>
+                <ul className="list-disc list-inside mt-1 font-medium">
+                  <li>wilsonligawa3@gmail.com</li>
+                  <li>any @caribbeancruises.site email</li>
+                </ul>
+              </div>
             </div>
           </div>
 
