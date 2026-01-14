@@ -1,7 +1,5 @@
-"use client"
+import { HomeClient } from "./home-client"
 
-import { createClient } from "../lib/supabase-server"
-
-export default function SyntheticV0PageForDeployment() {
-  return <createClient />
+export default function HomePage() {
+  return <HomeClient />
 }

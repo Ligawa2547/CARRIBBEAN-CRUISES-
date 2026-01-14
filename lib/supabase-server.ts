@@ -1,36 +1,32 @@
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
+import { createClient as createSupabaseClient } from "@supabase/supabase-js"
+import { cookies } from "next/headers"
+import type { Database } from "@/types/supabase"
 
-/**
- * Especially important if using Fluid compute: Don't put this client in a
- * global variable. Always create a new client within each function when using
- * it.
- */
-export async function createClient() {
-  const cookieStore = await cookies();
-
-  return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return cookieStore.getAll();
-        },
-        setAll(cookiesToSet) {
-          try {
-            cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options),
-            );
-          } catch {
-            // The "setAll" method was called from a Server Component.
-            // This can be ignored if you have middleware refreshing
-            // user sessions.
-          }
-        },
+// Create a function that creates a Supabase client for server components
+export function createServerClient() {
+  // Only create the cookie store when this function is called
+  // This ensures cookies() is only called in a request context
+  return createSupabaseClient<Database>(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
+    cookies: {
+      get(name: string) {
+        // Only access cookies when the function is called
+        return cookies().get(name)?.value
+      },
+      set(name: string, value: string, options: any) {
+        cookies().set({ name, value, ...options })
+      },
+      remove(name: string, options: any) {
+        cookies().set({ name, value: "", ...options })
       },
     },
-  );
+  })
 }
 
-export { createServerClient };
+export const createClient = createServerClient
+
+// For server actions and API routes that need direct access
+// Don't initialize with cookies at build time
+export const supabase = createSupabaseClient<Database>(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!,
+)
