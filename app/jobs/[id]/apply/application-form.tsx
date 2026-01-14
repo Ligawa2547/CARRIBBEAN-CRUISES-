@@ -49,6 +49,10 @@ export default function ApplicationForm({ job }: { job: Job }) {
     setIsSubmitting(true)
 
     try {
+      console.log("Form data:", data)
+      console.log("Job ID:", job.id)
+      console.log("User:", user)
+
       // If user is not logged in, prompt them to create an account
       if (!user) {
         // Store application data in session storage
@@ -69,8 +73,8 @@ export default function ApplicationForm({ job }: { job: Job }) {
         return
       }
 
-      // Submit application with user ID if logged in
-      const result = await submitApplication({
+      // Prepare application data
+      const applicationData = {
         job_id: job.id,
         user_id: user.id,
         full_name: data.full_name,
@@ -80,15 +84,23 @@ export default function ApplicationForm({ job }: { job: Job }) {
         resume_url: data.resume_url || null,
         status: "pending",
         created_at: new Date().toISOString(),
-      })
+      }
+
+      console.log("Submitting application data:", applicationData)
+
+      // Submit application with user ID if logged in
+      const result = await submitApplication(applicationData)
+
+      console.log("Application result:", result)
 
       if (result.success) {
         toast({
-          title: "Application submitted",
-          description: "Your application has been successfully submitted.",
+          title: "Application submitted successfully!",
+          description: "Your application has been submitted. You will receive a confirmation email shortly.",
         })
         router.push(`/jobs/${job.id}/apply/success`)
       } else {
+        console.error("Application submission failed:", result.error)
         toast({
           title: "Submission failed",
           description: result.error || "Failed to submit application. Please try again.",

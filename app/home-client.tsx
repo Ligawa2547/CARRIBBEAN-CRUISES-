@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, lazy, Suspense } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -26,10 +26,6 @@ import {
 import { ImageCarousel } from "@/components/image-carousel"
 import Footer from "@/components/footer"
 import Header from "@/components/header"
-import { HomeIcons } from "@/components/home-icons"
-
-// Lazy load components that aren't needed immediately
-const IconComponents = lazy(() => import("@/components/home-icons"))
 
 // Featured jobs data
 const featuredJobs = [
@@ -74,8 +70,7 @@ const upcomingCruises = [
     date: "June 15, 2025",
     cruiseLine: "Royal Caribbean",
     ship: "Wonder of the Seas",
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-104241367-612x612.jpg-5jL2o3b1iHARTRrkWgA5CXyRnC9h6b.jpeg",
+    image: "/images/istockphoto-104241367-612x612.jpeg",
   },
   {
     id: 2,
@@ -87,8 +82,7 @@ const upcomingCruises = [
     date: "July 8, 2025",
     cruiseLine: "Celebrity Cruises",
     ship: "Celebrity Beyond",
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-527091631-612x612.jpg-1UfelPfR6tzmFC6RZpkl1NfmTUFYpM.jpeg",
+    image: "/images/istockphoto-527091631-612x612.jpeg",
   },
   {
     id: 3,
@@ -100,8 +94,7 @@ const upcomingCruises = [
     date: "November 12, 2025",
     cruiseLine: "MSC Cruises",
     ship: "MSC Seashore",
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-523876470-612x612.jpg-R3vDPL0GdzHEamZw1sP7YywMtCkfin.jpeg",
+    image: "/images/istockphoto-523876470-612x612.jpeg",
   },
 ]
 
@@ -148,22 +141,19 @@ const featuredVideos = [
   {
     id: "video1",
     title: "Caribbean Cruise Experience",
-    thumbnail:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-523876470-612x612.jpg-R3vDPL0GdzHEamZw1sP7YywMtCkfin.jpeg",
+    thumbnail: "/images/istockphoto-523876470-612x612.jpeg",
     duration: "3:45",
   },
   {
     id: "video2",
     title: "Life Onboard Our Ships",
-    thumbnail:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-599881398-612x612.jpg-eFmo84tEmWwiTXdIyi3XGSvbZKrDea.jpeg",
+    thumbnail: "/images/istockphoto-599881398-612x612.jpeg",
     duration: "5:12",
   },
   {
     id: "video3",
     title: "Culinary Delights at Sea",
-    thumbnail:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-458115989-612x612.jpg-RplCqufQCEEykO51cHF3tKjHRbSLEN.jpeg",
+    thumbnail: "/images/istockphoto-458115989-612x612.jpeg",
     duration: "4:30",
   },
 ]
@@ -183,7 +173,7 @@ export function HomeClient() {
         <section className="relative">
           <div className="absolute inset-0 z-0">
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-523876470-612x612.jpg-R3vDPL0GdzHEamZw1sP7YywMtCkfin.jpeg"
+              src="/images/istockphoto-523876470-612x612.jpeg"
               alt="Cruise ship sailing through a fjord with mountains"
               fill
               className="object-cover"
@@ -308,7 +298,7 @@ export function HomeClient() {
                   </div>
                   <div className="relative h-[400px] rounded-xl overflow-hidden">
                     <Image
-                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-599881398-612x612.jpg-eFmo84tEmWwiTXdIyi3XGSvbZKrDea.jpeg"
+                      src="/images/istockphoto-599881398-612x612.jpeg"
                       alt="Cruise ship staff providing service"
                       fill
                       className="object-cover"
@@ -337,7 +327,7 @@ export function HomeClient() {
                         </div>
                         <p className="text-sm mb-4">{job.description}</p>
                         <div className="text-sm font-medium text-ocean-600 dark:text-ocean-400 mb-4">{job.salary}</div>
-                        <Button asChild variant="outline" size="sm" className="w-full">
+                        <Button asChild variant="outline" size="sm" className="w-full bg-transparent">
                           <Link href={`/jobs/${job.id}`}>View Details</Link>
                         </Button>
                       </CardContent>
@@ -391,7 +381,7 @@ export function HomeClient() {
                   </div>
                   <div className="order-1 md:order-2 relative h-[400px] rounded-xl overflow-hidden">
                     <Image
-                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-522033573-612x612.jpg-94FZLoMUwaC4c55oNXaI1g41xABzEw.jpeg"
+                      src="/images/istockphoto-522033573-612x612.jpeg"
                       alt="Luxury cruise ship in the Caribbean"
                       fill
                       className="object-cover"
@@ -432,7 +422,7 @@ export function HomeClient() {
                         <div className="text-sm font-medium text-ocean-600 dark:text-ocean-400 mb-4">
                           {cruise.price}
                         </div>
-                        <Button asChild variant="outline" size="sm" className="w-full">
+                        <Button asChild variant="outline" size="sm" className="w-full bg-transparent">
                           <Link href={`/cruises/${cruise.id}`}>View Details</Link>
                         </Button>
                       </CardContent>
@@ -515,11 +505,10 @@ export function HomeClient() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {isClient && (
-                <Suspense fallback={<div className="h-32 flex items-center justify-center">Loading...</div>}>
-                  <HomeIcons />
-                </Suspense>
-              )}
+              {/* Placeholder for HomeIcons component */}
+              {/* <Suspense fallback={<div className="h-32 flex items-center justify-center">Loading...</div>}>
+                <HomeIcons />
+              </Suspense> */}
             </div>
           </div>
         </section>
@@ -667,7 +656,7 @@ export function HomeClient() {
           </div>
         </section>
 
-        {/* Add this Videos Section before the CTA section */}
+        {/* Videos Section */}
         <section className="py-16 bg-gray-50 dark:bg-gray-900">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
@@ -718,7 +707,7 @@ export function HomeClient() {
             </div>
 
             <div className="text-center mt-10">
-              <Button asChild variant="outline" className="gap-2">
+              <Button asChild variant="outline" className="gap-2 bg-transparent">
                 <Link href="/videos">
                   <Film className="h-4 w-4" />
                   View All Videos
@@ -734,7 +723,7 @@ export function HomeClient() {
             <div className="relative overflow-hidden rounded-2xl">
               <div className="absolute inset-0">
                 <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/istockphoto-458115989-612x612.jpg-RplCqufQCEEykO51cHF3tKjHRbSLEN.jpeg"
+                  src="/images/istockphoto-458115989-612x612.jpeg"
                   alt="Cruise ship sailing on deep blue waters"
                   fill
                   className="object-cover"

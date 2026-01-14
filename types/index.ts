@@ -18,6 +18,20 @@ export interface Job {
   external_url?: string
 }
 
+export interface JobApplication {
+  id?: number
+  job_id: number
+  user_id?: string
+  full_name: string
+  email: string
+  phone: string
+  cover_letter?: string
+  resume_url?: string | null
+  status?: string
+  created_at?: string
+  updated_at?: string
+}
+
 export interface Application {
   id: number
   job_id: number

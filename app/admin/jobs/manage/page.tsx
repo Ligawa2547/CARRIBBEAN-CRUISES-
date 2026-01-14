@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { createClient } from "@/lib/supabase-server"
+import { supabase } from "@/lib/supabase-server"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -9,7 +9,6 @@ import type { Job } from "@/types"
 
 async function getJobs() {
   try {
-    const supabase = createClient()
     const { data, error } = await supabase.from("jobs").select("*").order("created_at", { ascending: false })
 
     if (error) {
@@ -103,14 +102,14 @@ export default async function ManageJobsPage() {
                   </Badge>
                 </div>
                 <div className="flex gap-2">
-                  <Button variant="outline" size="icon" className="h-8 w-8 bg-transparent">
+                  <Button variant="outline" size="icon" className="h-8 w-8">
                     <Edit className="h-4 w-4" />
                     <span className="sr-only">Edit</span>
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 bg-transparent"
+                    className="h-8 w-8 text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20"
                   >
                     <Trash className="h-4 w-4" />
                     <span className="sr-only">Delete</span>

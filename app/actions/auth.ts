@@ -13,21 +13,16 @@ const loginSchema = z.object({
 
 export type LoginFormData = z.infer<typeof loginSchema>
 
-// Admin email and domain authorization
-const AUTHORIZED_ADMIN_EMAIL = "wilsonligawa3@gmail.com"
-const AUTHORIZED_ADMIN_DOMAIN = "@caribbeancruises.site"
-
-function isAuthorizedEmail(email: string): boolean {
-  return email === AUTHORIZED_ADMIN_EMAIL || email.endsWith(AUTHORIZED_ADMIN_DOMAIN)
-}
+// Admin email that has access to the dashboard
+const ADMIN_EMAIL = "wilsonligawa3@gmail.com"
 
 export async function login(formData: LoginFormData): Promise<{ success: boolean; message: string }> {
   try {
     // Validate the form data
     const validatedData = loginSchema.parse(formData)
 
-    // Check if the email is authorized
-    if (!isAuthorizedEmail(validatedData.email)) {
+    // Check if the email is the authorized admin email
+    if (validatedData.email !== ADMIN_EMAIL) {
       return { success: false, message: "Access denied. You are not authorized to access the admin dashboard." }
     }
 
@@ -49,29 +44,25 @@ export async function login(formData: LoginFormData): Promise<{ success: boolean
       return { success: false, message: "Authentication failed" }
     }
 
-    // Verify the user's email is authorized
-    if (!isAuthorizedEmail(data.user.email || "")) {
-      // Sign out the user if they're not authorized
+    // Verify the user's email matches our admin email
+    if (data.user.email !== ADMIN_EMAIL) {
+      // Sign out the user if they're not the admin
       await supabase.auth.signOut()
       return { success: false, message: "Access denied. You are not authorized to access the admin dashboard." }
     }
 
-    // Set admin authentication cookie with improved security settings
-    const cookieStore = cookies()
-
-    cookieStore.set("admin-auth", "true", {
+    // Set admin authentication cookie
+    cookies().set("admin-auth", "true", {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
       maxAge: 60 * 60 * 24, // 1 day
       path: "/",
     })
 
     // Also set the user session cookie for additional verification
-    cookieStore.set("admin-user", data.user.email || "", {
+    cookies().set("admin-user", data.user.email, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
       maxAge: 60 * 60 * 24, // 1 day
       path: "/",
     })
@@ -105,12 +96,11 @@ export async function logout() {
 }
 
 export async function isAuthenticated() {
-  const cookieStore = cookies()
-  const adminAuth = cookieStore.get("admin-auth")?.value
-  const adminUser = cookieStore.get("admin-user")?.value
+  const adminAuth = cookies().get("admin-auth")?.value
+  const adminUser = cookies().get("admin-user")?.value
 
-  // Check both the auth flag and that the user is authorized
-  return adminAuth === "true" && adminUser && isAuthorizedEmail(adminUser)
+  // Check both the auth flag and that the user is the correct admin
+  return adminAuth === "true" && adminUser === ADMIN_EMAIL
 }
 
 export async function getAdminUser() {

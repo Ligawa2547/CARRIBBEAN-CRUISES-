@@ -33,11 +33,6 @@
     --ring: 196 100% 45%;
 
     --radius: 0.5rem;
-
-    /* Custom theme colors */
-    --ocean: 200 100% 45%;
-    --cruise: 172 75% 40%;
-    --gold: 38 92% 50%;
   }
 
   .dark {
@@ -68,11 +63,6 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 196 100% 50%;
-
-    /* Custom theme colors */
-    --ocean: 200 100% 50%;
-    --cruise: 172 75% 45%;
-    --gold: 38 92% 55%;
   }
 }
 
@@ -112,5 +102,11 @@
 
   .btn-gold {
     @apply bg-gold-500 hover:bg-gold-600 text-white;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
   }
 }

@@ -1,8 +1,7 @@
-import { createClient } from "@/lib/supabase-server"
+import { supabase } from "@/lib/supabase"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { formatDistanceToNow, format, isToday, isYesterday, isThisWeek, isThisMonth } from "date-fns"
-import { ApplicationAutomationControls } from "./application-automation-controls"
+import { formatDistanceToNow } from "date-fns"
 
 interface JobApplication {
   id: number
@@ -21,19 +20,16 @@ interface JobApplication {
 }
 
 async function getApplications() {
-  const supabase = createClient()
   try {
     const { data, error } = await supabase
       .from("applications")
-      .select(
-        `
+      .select(`
         *,
         jobs:job_id (
           title,
           department
         )
-      `,
-      )
+      `)
       .order("created_at", { ascending: false })
 
     if (error) {
@@ -48,37 +44,8 @@ async function getApplications() {
   }
 }
 
-function groupApplicationsByDate(applications: JobApplication[]) {
-  const groups: Record<string, JobApplication[]> = {
-    Today: [],
-    Yesterday: [],
-    "This Week": [],
-    "This Month": [],
-    Older: [],
-  }
-
-  applications.forEach((app) => {
-    const appDate = new Date(app.created_at)
-
-    if (isToday(appDate)) {
-      groups.Today.push(app)
-    } else if (isYesterday(appDate)) {
-      groups.Yesterday.push(app)
-    } else if (isThisWeek(appDate)) {
-      groups["This Week"].push(app)
-    } else if (isThisMonth(appDate)) {
-      groups["This Month"].push(app)
-    } else {
-      groups.Older.push(app)
-    }
-  })
-
-  return groups
-}
-
 export default async function AdminApplicationsPage() {
   const { applications, error } = await getApplications()
-  const groupedApplications = groupApplicationsByDate(applications)
 
   return (
     <div className="container py-10 md:py-16 px-4 md:px-6">
@@ -108,99 +75,69 @@ export default async function AdminApplicationsPage() {
         )}
 
         {applications.length > 0 && (
-          <div className="space-y-8">
-            {Object.entries(groupedApplications).map(
-              ([groupName, groupApps]) =>
-                groupApps.length > 0 && (
-                  <div key={groupName} className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <h2 className="text-xl font-semibold text-indigo-950 dark:text-white">{groupName}</h2>
-                      <Badge variant="outline" className="text-sm">
-                        {groupApps.length} {groupApps.length === 1 ? "application" : "applications"}
-                      </Badge>
+          <div className="space-y-6">
+            {applications.map((application) => (
+              <Card key={application.id} className="border-0 shadow-md bg-white dark:bg-slate-800">
+                <CardHeader className="pb-2">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <CardTitle className="text-indigo-950 dark:text-white">
+                        Application for {application.jobs?.title || "Unknown Position"}
+                      </CardTitle>
+                      <CardDescription>
+                        From: {application.full_name} ({application.email})
+                      </CardDescription>
                     </div>
+                    <Badge
+                      className={
+                        application.status === "approved"
+                          ? "bg-green-100 text-green-800 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-300 dark:hover:bg-green-900/50"
+                          : application.status === "rejected"
+                            ? "bg-red-100 text-red-800 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-300 dark:hover:bg-red-900/50"
+                            : "bg-amber-100 text-amber-800 hover:bg-amber-200 dark:bg-amber-900/30 dark:text-amber-300 dark:hover:bg-amber-900/50"
+                      }
+                    >
+                      {application.status}
+                    </Badge>
+                  </div>
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    <Badge
+                      variant="outline"
+                      className="bg-indigo-50 text-indigo-700 border-indigo-200 dark:bg-indigo-900/30 dark:text-indigo-300 dark:border-indigo-800/50"
+                    >
+                      {application.jobs?.department || "Unknown Department"}
+                    </Badge>
+                    <Badge
+                      variant="outline"
+                      className="bg-slate-50 text-slate-700 border-slate-200 dark:bg-slate-900/30 dark:text-slate-300 dark:border-slate-800/50"
+                    >
+                      {application.experience_years} {application.experience_years === 1 ? "year" : "years"} experience
+                    </Badge>
+                  </div>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                    {formatDistanceToNow(new Date(application.created_at), { addSuffix: true })}
+                  </p>
+                </CardHeader>
+                <CardContent>
+                  <h3 className="font-medium text-indigo-950 dark:text-white mb-2">Cover Letter</h3>
+                  <p className="text-slate-600 dark:text-slate-300 whitespace-pre-wrap">{application.cover_letter}</p>
 
-                    <div className="space-y-4">
-                      {groupApps.map((application) => (
-                        <Card key={application.id} className="border-0 shadow-md bg-white dark:bg-slate-800">
-                          <CardHeader className="pb-2">
-                            <div className="flex justify-between items-start">
-                              <div>
-                                <CardTitle className="text-indigo-950 dark:text-white">
-                                  Application for {application.jobs?.title || "Unknown Position"}
-                                </CardTitle>
-                                <CardDescription>
-                                  From: {application.full_name} ({application.email})
-                                </CardDescription>
-                              </div>
-                              <Badge
-                                className={
-                                  application.status === "approved"
-                                    ? "bg-green-100 text-green-800 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-300 dark:hover:bg-green-900/50"
-                                    : application.status === "rejected"
-                                      ? "bg-red-100 text-red-800 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-300 dark:hover:bg-red-900/50"
-                                      : "bg-amber-100 text-amber-800 hover:bg-amber-200 dark:bg-amber-900/30 dark:text-amber-300 dark:hover:bg-amber-900/50"
-                                }
-                              >
-                                {application.status}
-                              </Badge>
-                            </div>
-                            <div className="flex flex-wrap gap-2 mt-2">
-                              <Badge
-                                variant="outline"
-                                className="bg-indigo-50 text-indigo-700 border-indigo-200 dark:bg-indigo-900/30 dark:text-indigo-300 dark:border-indigo-800/50"
-                              >
-                                {application.jobs?.department || "Unknown Department"}
-                              </Badge>
-                              <Badge
-                                variant="outline"
-                                className="bg-slate-50 text-slate-700 border-slate-200 dark:bg-slate-900/30 dark:text-slate-300 dark:border-slate-800/50"
-                              >
-                                {application.experience_years} {application.experience_years === 1 ? "year" : "years"}{" "}
-                                experience
-                              </Badge>
-                            </div>
-                            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                              {format(new Date(application.created_at), "PPpp")} (
-                              {formatDistanceToNow(new Date(application.created_at), { addSuffix: true })})
-                            </p>
-                          </CardHeader>
-                          <CardContent>
-                            <h3 className="font-medium text-indigo-950 dark:text-white mb-2">Cover Letter</h3>
-                            <p className="text-slate-600 dark:text-slate-300 whitespace-pre-wrap">
-                              {application.cover_letter}
-                            </p>
-
-                            <div className="mt-4 pt-4 border-t">
-                              <h3 className="font-medium text-indigo-950 dark:text-white mb-2">Contact Information</h3>
-                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
-                                <div>
-                                  <span className="text-slate-500 dark:text-slate-400">Email: </span>
-                                  <span className="text-slate-600 dark:text-slate-300">{application.email}</span>
-                                </div>
-                                <div>
-                                  <span className="text-slate-500 dark:text-slate-400">Phone: </span>
-                                  <span className="text-slate-600 dark:text-slate-300">{application.phone}</span>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="mt-4 pt-4 border-t">
-                              <ApplicationAutomationControls
-                                applicationId={application.id}
-                                currentStatus={application.status}
-                                applicantName={application.full_name}
-                                applicantEmail={application.email}
-                                jobTitle={application.jobs?.title || "Position"}
-                              />
-                            </div>
-                          </CardContent>
-                        </Card>
-                      ))}
+                  <div className="mt-4 pt-4 border-t">
+                    <h3 className="font-medium text-indigo-950 dark:text-white mb-2">Contact Information</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+                      <div>
+                        <span className="text-slate-500 dark:text-slate-400">Email: </span>
+                        <span className="text-slate-600 dark:text-slate-300">{application.email}</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-500 dark:text-slate-400">Phone: </span>
+                        <span className="text-slate-600 dark:text-slate-300">{application.phone}</span>
+                      </div>
                     </div>
                   </div>
-                ),
-            )}
+                </CardContent>
+              </Card>
+            ))}
           </div>
         )}
       </div>

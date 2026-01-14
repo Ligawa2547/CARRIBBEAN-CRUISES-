@@ -1,11 +1,9 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { createClient } from "@/lib/supabase-server"
+import { supabase } from "@/lib/supabase-server"
 import { sendBulkApplicationEmails } from "@/lib/resend-email"
 
 export async function POST(request: NextRequest) {
   try {
-    const supabase = createClient()
-
     // Get all applications with job information by joining with jobs table
     const { data: applications, error } = await supabase
       .from("applications")

@@ -1,41 +1,40 @@
 "use server"
 
-import { supabase } from "@/lib/supabase"
-import type { Job } from "@/types"
+import { supabase } from "@/lib/supabase-server"
 
-export async function getJobs(): Promise<{ jobs: Job[]; error: string | null }> {
+export async function getJobs() {
   try {
     const { data, error } = await supabase.from("jobs").select("*").order("created_at", { ascending: false })
 
     if (error) {
       console.error("Error fetching jobs:", error)
-      return { jobs: [], error: error.message }
+      return { success: false, error: error.message, data: [] }
     }
 
-    return { jobs: data as Job[], error: null }
+    return { success: true, error: null, data: data || [] }
   } catch (error) {
-    console.error("Error in getJobs:", error)
-    return { jobs: [], error: String(error) }
+    console.error("Unexpected error fetching jobs:", error)
+    return { success: false, error: String(error), data: [] }
   }
 }
 
-export async function getJobById(id: number): Promise<{ job: Job | null; error: string | null }> {
+export async function getJobById(id: number) {
   try {
     const { data, error } = await supabase.from("jobs").select("*").eq("id", id).single()
 
     if (error) {
       console.error("Error fetching job:", error)
-      return { job: null, error: error.message }
+      return { success: false, error: error.message, data: null }
     }
 
-    return { job: data as Job, error: null }
+    return { success: true, error: null, data }
   } catch (error) {
-    console.error("Error in getJobById:", error)
-    return { job: null, error: String(error) }
+    console.error("Unexpected error fetching job:", error)
+    return { success: false, error: String(error), data: null }
   }
 }
 
-export async function getJobsByDepartment(department: string): Promise<{ jobs: Job[]; error: string | null }> {
+export async function getJobsByDepartment(department: string) {
   try {
     const { data, error } = await supabase
       .from("jobs")
@@ -45,17 +44,17 @@ export async function getJobsByDepartment(department: string): Promise<{ jobs: J
 
     if (error) {
       console.error("Error fetching jobs by department:", error)
-      return { jobs: [], error: error.message }
+      return { success: false, error: error.message, data: [] }
     }
 
-    return { jobs: data as Job[], error: null }
+    return { success: true, error: null, data: data || [] }
   } catch (error) {
-    console.error("Error in getJobsByDepartment:", error)
-    return { jobs: [], error: String(error) }
+    console.error("Unexpected error fetching jobs by department:", error)
+    return { success: false, error: String(error), data: [] }
   }
 }
 
-export async function searchJobs(query: string): Promise<{ jobs: Job[]; error: string | null }> {
+export async function searchJobs(query: string) {
   try {
     const { data, error } = await supabase
       .from("jobs")
@@ -65,49 +64,48 @@ export async function searchJobs(query: string): Promise<{ jobs: Job[]; error: s
 
     if (error) {
       console.error("Error searching jobs:", error)
-      return { jobs: [], error: error.message }
+      return { success: false, error: error.message, data: [] }
     }
 
-    return { jobs: data as Job[], error: null }
+    return { success: true, error: null, data: data || [] }
   } catch (error) {
-    console.error("Error in searchJobs:", error)
-    return { jobs: [], error: String(error) }
+    console.error("Unexpected error searching jobs:", error)
+    return { success: false, error: String(error), data: [] }
   }
 }
 
-export async function getFeaturedJobs(): Promise<{ jobs: Job[]; error: string | null }> {
+export async function getFeaturedJobs() {
   try {
     const { data, error } = await supabase
       .from("jobs")
       .select("*")
       .eq("featured", true)
       .order("created_at", { ascending: false })
-      .limit(6)
 
     if (error) {
       console.error("Error fetching featured jobs:", error)
-      return { jobs: [], error: error.message }
+      return { success: false, error: error.message, data: [] }
     }
 
-    return { jobs: data as Job[], error: null }
+    return { success: true, error: null, data: data || [] }
   } catch (error) {
-    console.error("Error in getFeaturedJobs:", error)
-    return { jobs: [], error: String(error) }
+    console.error("Unexpected error fetching featured jobs:", error)
+    return { success: false, error: String(error), data: [] }
   }
 }
 
-export async function getJobsCount(): Promise<{ count: number; error: string | null }> {
+export async function getJobsCount() {
   try {
     const { count, error } = await supabase.from("jobs").select("*", { count: "exact", head: true })
 
     if (error) {
       console.error("Error getting jobs count:", error)
-      return { count: 0, error: error.message }
+      return { success: false, error: error.message, count: 0 }
     }
 
-    return { count: count || 0, error: null }
+    return { success: true, error: null, count: count || 0 }
   } catch (error) {
-    console.error("Error in getJobsCount:", error)
-    return { count: 0, error: String(error) }
+    console.error("Unexpected error getting jobs count:", error)
+    return { success: false, error: String(error), count: 0 }
   }
 }
